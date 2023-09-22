@@ -7,10 +7,7 @@ import AllDishes from '../components/AllDishes';
 const Home: React.FC = () => {
   return (
     <div>
-      <Header />
-      <NearbyDishes />
-      <FavoriteDishes />
-      <AllDishes />
+      askdfjlkfjhadfad
     </div>
   );
 };

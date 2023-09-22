@@ -2,6 +2,7 @@ import AuthFormLayout from '../components/AuthFormLayout/index.tsx';
 import Input from '../components/Inputs';
 import Button from '../components/Button.tsx';
 import { useState } from 'react';
+import SidebarLayout from '../components/SidebarLayout/index.tsx';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +24,9 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
+    <SidebarLayout>
     <AuthFormLayout>
+      <div className='righHalf'>
       <h2>Esqueci Minha Senha</h2>
       <Input
         type="email"
@@ -51,7 +54,9 @@ const ForgotPassword: React.FC = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <Button onClick={handleSetNewPassword} label="Definir Nova Senha" />
+      </div>
     </AuthFormLayout>
+    </SidebarLayout>
   );
 };
 
