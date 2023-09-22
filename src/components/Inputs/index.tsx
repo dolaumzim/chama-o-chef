@@ -1,25 +1,15 @@
 import React from 'react';
+import * as Styled from './styles'
 
-interface InputProps {
-  type: string;
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const Input: React.FC<InputProps> = ({
-  type,
-  placeholder,
-  value,
-  onChange
-}) => {
+const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
+  props
+) => {
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-    />
+    <Styled.InputArea>
+      <Styled.Input
+        {...props}
+      />
+    </Styled.InputArea>
   );
 };
 
