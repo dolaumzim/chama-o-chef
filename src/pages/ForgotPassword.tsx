@@ -1,5 +1,5 @@
 import AuthFormLayout from '../components/AuthFormLayout/index.tsx';
-import Input from '../components/Inputs';
+import Input from '../components/Input/index.tsx';
 import Button from '../components/Button.tsx';
 import { useState } from 'react';
 import SidebarLayout from '../components/SidebarLayout/index.tsx';
