@@ -1,12 +1,14 @@
-import * as Yup from 'yup';
-import AuthFormLayout from '../components/AuthFormLayout/index.tsx';
-import Button from '../components/Button.tsx';
-import { postLoginRequest } from '../services/Auth/postLogin.ts';
 import { Formik, Form, Field } from 'formik';
-import { useState } from 'react';
-import SidebarLayout from '../components/SidebarLayout/index.tsx';
+import {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import '../stylesteste.css';
+import * as Props from './structure.ts';
+import SidebarLayout from '../../components/SidebarLayout/index.tsx';
+import { postLoginRequest } from '../../services/Auth/postLogin.ts';
+import AuthFormLayout from '../../components/AuthFormLayout/index.tsx';
+import Button from '../../components/Button.tsx/index.tsx';
+import * as PropsServices from '../../services/structure.ts';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,17 +17,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const initialValues: { email: string; password: string } = {
-    email: '',
-    password: ''
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string().email('E-mail inválido').required('Campo obrigatório'),
-    password: Yup.string().required('Campo obrigatório')
-  });
-
-  const onSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const onSubmit = async (values: Props.PropsLogin) => {
     try {
       setIsLoading(true);
       setLoginError(null);
@@ -35,7 +27,9 @@ const Login = () => {
         password: values.password
       };
 
-      const response = await postLoginRequest({ user });
+      const response = await postLoginRequest({
+        user
+      } as PropsServices.PropsLogin);
       const token = response.data.access_token;
 
       localStorage.setItem('token', token);
@@ -46,7 +40,6 @@ const Login = () => {
       setLoginError('Email ou senha incorretos.');
     } finally {
       setIsLoading(false);
-      setSubmitting(false);
     }
   };
 
@@ -60,8 +53,8 @@ const Login = () => {
         )}
         <div className="rightHalf">
           <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
+            initialValues={Props.initialValues}
+            validationSchema={Props.validationSchema}
             onSubmit={onSubmit}
           >
             {({
@@ -70,7 +63,8 @@ const Login = () => {
               touched,
               values,
               handleChange,
-              handleBlur
+              handleBlur,
+              isValid
             }) => (
               <Form>
                 <div>
@@ -103,11 +97,7 @@ const Login = () => {
                   ) : null}
                 </div>
 
-                <Button
-                  type="submit"
-                  label="Login"
-                  disabled={isSubmitting || isLoading}
-                />
+                <Button label="Login" disabled={isSubmitting || !isValid} />
               </Form>
             )}
           </Formik>
