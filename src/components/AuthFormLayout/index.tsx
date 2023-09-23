@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
+import { Outlet } from 'react-router';
+import { Container, LayoutSection, LayoutTitle, OutletSection } from './styles';
 
-interface AuthFormLayoutProps {
-  children: ReactNode;
-}
-
-const AuthFormLayout: React.FC<AuthFormLayoutProps> = ({ children }) => {
+export const AuthFormLayout: React.FC = () => {
   return (
-    <div>
-        {children}
-    </div>
+    <Container>
+      <LayoutSection >
+      <div>
+        <LayoutTitle>FRASE DE EFEITO</LayoutTitle>
+      </div>
+      </LayoutSection>
+      <OutletSection><Outlet/></OutletSection>
+    </Container>
   );
 };
-
-export default AuthFormLayout;

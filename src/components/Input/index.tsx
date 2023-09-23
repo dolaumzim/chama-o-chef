@@ -5,11 +5,7 @@ const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
   props
 ) => {
   return (
-    <Styled.InputArea>
-      <Styled.Input
-        {...props}
-      />
-    </Styled.InputArea>
+    <Styled.Input {...props}/>
   );
 };
 

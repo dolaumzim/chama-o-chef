@@ -7,7 +7,7 @@ export interface PropsLogin {
     passwordConfirmation: string;
     created_at: Date;
     updated_at: Date;
-    telephones: [
+    telephones:
       {
         id: string;
         number: number;
@@ -15,9 +15,9 @@ export interface PropsLogin {
         contactable_id: string;
         created_at: Date;
         updated_at: Date;
-      }
-    ];
-    addresses: [
+      }[]
+    
+    addresses:
       {
         id: string;
         name: string;
@@ -34,35 +34,55 @@ export interface PropsLogin {
         addressable_id: string;
         created_at: Date;
         updated_at: Date;
-      }
-    ];
+      }[]
   };
   access_token: string;
   refresh_token: string;
 }
 
-export interface PropsSignUp {
-  user: {
+export interface SignUpLocal {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  telephones_attributes: 
+    {
+    number: number|null;
+    }[]
+  addresses_attributes?: 
+    {
     name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-    telephones_attributes: {
-      number: number;
-    };
-    addresses_attributes: {
-      name: string;
-      public_place: string;
-      zip_code: string;
-      number: number;
-      neighborhood: string;
-      reference: string;
-      complement: string;
-      city_id: string;
-      latitude: number;
-      longitude: number;
-    };
-  };
+    public_place: string;
+    zip_code: string;
+    number: number|null;
+    neighborhood: string;
+    reference: string;
+    complement: string;
+    city_id: string;
+    latitude: number|null;
+    longitude: number|null;
+    }[]
+}
+
+export interface PropsSignUp {
+  user: SignUpLocal 
+}
+
+export interface AddressProps{
+  cep: string,
+  street: string,
+  neighborhood: string,
+  city: string,
+  state: string,
+  service: string,
+  location: {
+      type: string,
+      coordinates: {
+          longitude: string,
+          latitude: string
+      }
+  },
+  city_id: string
 }
 
 export interface PropsDelete {}
