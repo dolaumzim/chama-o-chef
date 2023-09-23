@@ -1,12 +1,10 @@
-import React from 'react';
-
 interface ButtonProps {
-  onClick: () => void;
+  disabled: boolean;
   label: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, label }) => {
-  return <button onClick={onClick}>{label}</button>;
+const Button = ({ disabled=true, label }:ButtonProps) => {
+  return <button type="submit" disabled={disabled}>{label}</button>;
 };
 
 export default Button;
