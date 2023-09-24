@@ -4,6 +4,7 @@ export const DishContainer = styled.div`
   width: 200px;
   height: 200px;
   flex-shrink: 0;
+  margin-top: 50px;
   border-radius: 10px;
   background: #f0f0f0;
   position: relative;

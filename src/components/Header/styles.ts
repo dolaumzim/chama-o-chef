@@ -107,7 +107,7 @@ export const Menu = styled.div`
   .dropdown-menu {
     position: absolute;
     top: 100px;
-    right: 20px;
+    right: 75px;
     background-color: #fff;
     border-radius: 8px;
     padding: 10px 20px;
