@@ -3,8 +3,8 @@ import Login from '../pages/Login';
 import ForgotPassword from '../pages/ForgotPassword';
 import Home from '../pages/Home';
 import { AuthFormLayout } from '../components/AuthFormLayout';
-import { SignUp } from '../pages/SignUp/SignUp';
-import SidebarLayout from '../components/SidebarLayout';
+import { SignUp } from '../pages/SignUp';
+// import SidebarLayout from '../components/SidebarLayout';
 
 const ChamaOChefeRoutes = () => {
   return (

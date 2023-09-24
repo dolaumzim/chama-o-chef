@@ -7,9 +7,11 @@ export const FormType = styled(Form)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 80%;
     gap: 20px;
-
+    color : red;
+    font-size: 15px;
+    font-weight: 400;
 `
 
 export const NumberComplement = styled.div`
@@ -77,6 +79,14 @@ export const SubmitButton = styled.button`
     background: #F58100; 
     margin: 20px;
     width: 50%;
+    padding: 12px 56px;
+    transition: ease-out 300ms;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #de7702;
+        transition: ease-out 300ms;
+    }
 `
 
 export const AlreadySignedUp = styled.span`
@@ -100,6 +110,8 @@ export const StepButton = styled.button`
     font-style: normal;
     font-weight: 300;
     line-height: normal; 
+    height: 45px;
+    width: 45px;
 `
 
 export const StepGo = styled.div`

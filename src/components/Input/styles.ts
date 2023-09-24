@@ -13,7 +13,7 @@ export const Input = styled(Field)`
     font-weight: 600;
     line-height: normal;  
     height:6vh;
-    width:80%;
+    width:60%;
     padding: 5px 10px;
 
     &::placeholder{
