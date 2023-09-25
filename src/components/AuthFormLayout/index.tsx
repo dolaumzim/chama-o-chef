@@ -5,7 +5,7 @@ export const AuthFormLayout: React.FC = () => {
   return (
     <Container>
       <LayoutSection >
-        <LayoutTitle>Aproveite do conforto da sua casa, os melhores pratos do melhores Chefs!</LayoutTitle>
+        <LayoutTitle>Aproveite, <i>do conforto da sua casa</i>, os melhores <i>Pratos</i> dos melhores <i>Chefs</i>!</LayoutTitle>
       </LayoutSection>
       <OutletSection><Outlet/></OutletSection>
     </Container>
