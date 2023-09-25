@@ -1,14 +1,13 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import '../stylesteste.css';
 import * as Props from './structure.ts';
-import SidebarLayout from '../../components/SidebarLayout/index.tsx';
 import { postLoginRequest } from '../../services/Auth/postLogin.ts';
-import AuthFormLayout from '../../components/AuthFormLayout/index.tsx';
 import Button from '../../components/Button.tsx/index.tsx';
 import * as PropsServices from '../../services/structure.ts';
+import Input from '../../components/Input/index.tsx';
+import { ErrorSpan, FormType, NewUser, NewUserLink, PageSubtitle, PageTitle, PasswordForgot, SubmitButton } from './styles.ts';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,14 +43,7 @@ const Login = () => {
   };
 
   return (
-    <SidebarLayout>
-      <AuthFormLayout>
-        <h2>Login</h2>
-        {loginError && <div className="error-message">{loginError}</div>}
-        {loginSuccess && (
-          <div className="success-message">Login bem-sucedido!</div>
-        )}
-        <div className="rightHalf">
+      <>
           <Formik
             initialValues={Props.initialValues}
             validationSchema={Props.validationSchema}
@@ -66,9 +58,12 @@ const Login = () => {
               handleBlur,
               isValid
             }) => (
-              <Form>
-                <div>
-                  <Field
+              <FormType>
+                  <img src="public/Logo Login.svg" alt="" />
+                  <PageTitle>Acesse sua conta</PageTitle>
+                  <PageSubtitle>Insira seus dados abaixo para realizar o Login</PageSubtitle>
+                
+                  <Input
                     type="email"
                     placeholder="E-mail"
                     name="email"
@@ -78,12 +73,10 @@ const Login = () => {
                     disabled={isSubmitting || isLoading}
                   />
                   {touched.email && errors.email ? (
-                    <div>{errors.email}</div>
+                    <ErrorSpan>{errors.email}</ErrorSpan>
                   ) : null}
-                </div>
-
-                <div>
-                  <Field
+                
+                  <Input
                     type="password"
                     placeholder="Senha"
                     name="password"
@@ -93,19 +86,28 @@ const Login = () => {
                     disabled={isSubmitting || isLoading}
                   />
                   {touched.password && errors.password ? (
-                    <div>{errors.password}</div>
+                    <ErrorSpan>{errors.password}</ErrorSpan>
                   ) : null}
-                </div>
 
-                <Button label="Login" disabled={isSubmitting || !isValid} />
-              </Form>
+                  {loginError && <ErrorSpan>{loginError}</ErrorSpan>}
+                  {loginSuccess && (
+                    <div className="success-message">Login bem-sucedido!</div>
+                  )}
+
+                <PasswordForgot to={'/password-forgot'}>Esqueceu a senha?</PasswordForgot>
+                {/* <Button label="Login" disabled={isSubmitting || !isValid} /> */}
+                <SubmitButton disabled={isSubmitting || !isValid}>
+                  Entrar
+                </SubmitButton>
+
+              <NewUser>
+                Não tem uma conta?
+              <NewUserLink to="/SignUp"> Cadastre-se</NewUserLink>
+            </NewUser>
+              </FormType>
             )}
           </Formik>
-          <Link to="/forgot-password">Esqueci minha senha</Link>
-          <Link to="/signup">Cadastro</Link>
-        </div>
-      </AuthFormLayout>
-    </SidebarLayout>
+      </>
   );
 };
 

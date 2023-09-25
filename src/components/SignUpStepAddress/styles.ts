@@ -1,20 +1,25 @@
 import styled from "styled-components";
-import {Form} from 'formik'
+import { Form } from 'formik'
 import { Link } from "react-router-dom";
 
 export const FormType = styled(Form)`
-    display:flex; 
+    display: flex; 
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    width: 60%;
+    width: 80%;
     gap: 20px;
-
+    overflow-y:auto;
+    height:90%;
+    color : red;
+    font-size: 15px;
+    font-weight: 400;
 `
 
 export const NumberComplement = styled.div`
-    display:flex;
-    width: 80%;
+    display: flex;
+    height: 6vh;
+    width: 60%;
     gap: 1vw;
     box-sizing:border-box;
 
@@ -24,16 +29,17 @@ export const NumberComplement = styled.div`
     `
 
 export const NumberContainer = styled.div`
-    width: 20%;
+    width: 25%;
     `
     
 export const ComplementContainer = styled.div`
-    width: 80%;
+    width: 75%;
     `
 
 export const CityState = styled.div`
-    display:flex;
-    width: 80%;
+    display: flex;
+    height: 6vh;
+    width: 60%;
     gap:1vw;
 
     input{
@@ -77,6 +83,14 @@ export const SubmitButton = styled.button`
     background: #F58100; 
     margin: 20px;
     width: 50%;
+    padding: 12px 56px;
+    transition: ease-out 300ms;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #de7702;
+        transition: ease-out 300ms;
+    }
 `
 
 export const AlreadySignedUp = styled.span`
@@ -99,7 +113,9 @@ export const StepButton = styled.button`
     font-size: 15px;
     font-style: normal;
     font-weight: 300;
-    line-height: normal; 
+    line-height: normal;
+    height: 45px;
+    width: 45px; 
 `
 
 export const StepGo = styled.div`
@@ -122,4 +138,13 @@ export const StepBack = styled.div`
     color: #959595;
     font-size: 15px;
     font-weight: 300;
+`
+
+export const CancelAddress = styled.button`
+    background-color: #fff;
+    color: #7B7A7A;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 60%;
 `
