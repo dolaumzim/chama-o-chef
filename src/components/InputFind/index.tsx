@@ -1,11 +1,13 @@
 import { FindInput } from './styles';
 import find from '../../assets/find.svg';
 
-export const InputFind = () => {
+export const InputFind: React.FC<
+  React.InputHTMLAttributes<HTMLInputElement>
+> = props => {
   return (
-    <FindInput placeholder="Busque por prato ou chef">
+    <FindInput>
       <img src={find} />
-      <input type="text" placeholder="Busque por prato ou chef" />
+      <input {...props} />
     </FindInput>
   );
 };
