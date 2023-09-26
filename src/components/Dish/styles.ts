@@ -38,14 +38,14 @@ export const DishInfo = styled.div`
   padding: 10px;
   border-radius: 10px;
   background: #fff;
+`;
 
-  h2 {
-    margin-bottom: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-    font-family: 'Montserrat', sans-serif;
-  }
+export const StyledTitle = styled.h2`
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
+  text-transform: capitalize;
 `;
 
 export const StyledParagraph = styled.p`
