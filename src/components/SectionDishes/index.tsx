@@ -21,7 +21,7 @@ export const SectionDishes: React.FC = () => {
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(
-      ['/posts', [debouncedTitle]],
+      ['/dishes', [debouncedTitle]],
       ({ pageParam = 1 }) => getDishes(pageParam, perPage, debouncedTitle),
       {
         getNextPageParam: lastPage => {
@@ -29,7 +29,6 @@ export const SectionDishes: React.FC = () => {
         }
       }
     );
-  console.log(data?.pages);
 
   const items = useMemo(() => {
     return data?.pages.reduce((acc, page) => {
@@ -43,6 +42,7 @@ export const SectionDishes: React.FC = () => {
 
   return (
     <StyledSection>
+      <br></br>
       <StyledTitle>
         <TitleContainer>
           <h1>Pratos</h1>

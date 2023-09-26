@@ -24,6 +24,7 @@ import { postSignUpRequest } from '../../services/Auth/postSignUp.ts';
 import {
   SignUpStepAddressProps,
   dataSchema,
+  emptyAddresses,
 } from './structures.ts';
 import { useState } from 'react';
 
@@ -48,23 +49,6 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
       setCepError(true);
     }
   };
-
-  const emptyAddresses = {
-    cep: '',
-    street: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    service: '',
-    location: {
-      type: '',
-      coordinates: {
-        longitude: '',
-        latitude: '',
-      },
-    },
-    city_id: '',
-  }
 
   const handleSignUp = async (values: SignUpLocal) => {
     try {

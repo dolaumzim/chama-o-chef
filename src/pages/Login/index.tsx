@@ -31,8 +31,10 @@ const Login = () => {
         user
       } as PropsServices.PropsLogin);
       const token = response.data.access_token;
+      const refresh_token = response.data.refresh_token;
 
       localStorage.setItem('token', token);
+      localStorage.setItem('refresh_token', refresh_token);
       setLoginSuccess(true);
       navigate(`/home`);
     } catch (error) {
@@ -96,7 +98,6 @@ const Login = () => {
                   )}
 
                 <PasswordForgot to={frontEndRoutes.forgotPassword}>Esqueceu a senha?</PasswordForgot>
-                {/* <Button label="Login" disabled={isSubmitting || !isValid} /> */}
                 <SubmitButton disabled={isSubmitting || !isValid}>
                   Entrar
                 </SubmitButton>
