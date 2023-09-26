@@ -1,33 +1,23 @@
 import { backendRoutesApi } from '..';
 import { apiChef } from '../api';
 
-export type Paginated<T> = {
-  data: T[];
-  currentPage: number;
-  totalPages: number;
-  total: number;
-};
-
 export const getDishes = async (
-  pageParam: number,
-  perPage: number,
-  title = ''
+  page: number = 1,
+  per_page: number = 15,
+  term?: string
 ) => {
-  const token = localStorage.getItem('token');
-  const config = {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: token ? `Bearer ${token}` : ''
-    },
+  try {
+    const response = await apiChef.get(backendRoutesApi.dishes, {
     params: {
-      page: pageParam,
-      per_page: perPage,
-      term: title
+      page,
+      per_page,
+      term
     }
-  };
-  return await apiChef
-    .get(`${backendRoutesApi.dishes}`, config)
-    .then(res => res.data)
-    .catch(error => Promise.reject(error));
-};
+  })
+  console.log(response.data)
+  return response.data
+  } catch (error) {
+    console.log(error)
+    throw new Error('Erro de requisição');
+  }
+}

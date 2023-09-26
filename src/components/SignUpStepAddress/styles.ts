@@ -118,17 +118,6 @@ export const StepButton = styled.button`
     width: 45px; 
 `
 
-export const StepGo = styled.div`
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    width: 90%;
-    gap: 20px;
-    color: #959595;
-    font-size: 15px;
-    font-weight: 300;
-    `
-
 export const StepBack = styled.div`
     display: flex;
     justify-content: start;

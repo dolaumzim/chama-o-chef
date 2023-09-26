@@ -6,6 +6,23 @@ export interface SignUpStepAddressProps {
     prev: (values: SignUpLocal) => void;
   }
 
+  export const emptyAddresses = {
+    cep: '',
+    street: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    service: '',
+    location: {
+      type: '',
+      coordinates: {
+        longitude: '',
+        latitude: '',
+      },
+    },
+    city_id: '',
+  }
+
   const addressesSchema = Yup.object().shape({
     zip_code: Yup.string().matches(/^(\d{8})$/, 'Formato inválido').required('Campo obrigatório'),
     name: Yup.string().min(2,'Deve ter no mínimo 2 caracteres').required('Campo obrigatório'),
