@@ -6,31 +6,29 @@ import { SignUp } from '../pages/SignUp';
 
 import { ForgotPassword } from '../pages/ForgotPassword';
 import { frontEndRoutes } from '.';
-import { Locationteste } from '../pages/locationteste';
-import { UserProfile } from '../pages/UserProfile';
-
 
 const ChamaOChefeRoutes = () => {
-// if(logged) 
+  // if(logged)
   return (
-      <Routes>
-        <Route element={<PublicSectionLayout />}>
-          <Route path={frontEndRoutes.login} element={<Login />} />
-          <Route path={frontEndRoutes.signup} element={<SignUp />} />
-          <Route path={frontEndRoutes.forgotPassword} element={<ForgotPassword/>} />
-          <Route path="/location" element={<Locationteste/>} />
-        </Route>
-        <Route path="/*" element={<Navigate replace to={'/login'} />} />
+    <Routes>
+      <Route element={<PublicSectionLayout />}>
+        <Route path={frontEndRoutes.login} element={<Login />} />
+        <Route path={frontEndRoutes.signup} element={<SignUp />} />
+        <Route
+          path={frontEndRoutes.forgotPassword}
+          element={<ForgotPassword />}
+        />
+      </Route>
+      <Route path="/*" element={<Navigate replace to={'/login'} />} />
       {/* </Routes>
         )
         
         return (
         <Routes> */}
-        <Route path={frontEndRoutes.home} element={<Home />} />
-        <Route path={frontEndRoutes.userProfile} element={<UserProfile/>} />
-        <Route path="/*" element={<Navigate replace to={'/login'} />} />
-      </Routes>
-    );
+      <Route path={frontEndRoutes.home} element={<Home />} />
+      <Route path="/*" element={<Navigate replace to={'/login'} />} />
+    </Routes>
+  );
 };
 
 export default ChamaOChefeRoutes;
