@@ -18,7 +18,7 @@ export interface ClientAddress {
 
 export interface ClientTelephone {
   id: string;
-  number: number;
+  number: number | null;
   contactable_type: string;
   contactable_id: string;
   created_at: Date;
