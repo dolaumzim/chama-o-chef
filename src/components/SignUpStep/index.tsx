@@ -10,7 +10,7 @@ import {
   StepGo
 } from './styles.ts';
 import { useNavigate } from 'react-router-dom';
-import { postSignUpRequest } from '../../services/Auth/postSignUp';
+import { postSignUpRequest } from '../../services/Auth/postSignUp.ts';
 import Input from '../Input/index.tsx';
 import { SignUpStepProps, dataSchema } from './structures.ts';
 import { useState } from 'react';

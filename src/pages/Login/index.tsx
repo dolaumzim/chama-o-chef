@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../stylesteste.css';
 import * as Props from './structure.ts';
 import { postLoginRequest } from '../../services/Auth/postLogin.ts';
-import Button from '../../components/Button.tsx/index.tsx';
+// import {Button} from '../../components/Button.tsx/index.tsx';
 import * as PropsServices from '../../services/structure.ts';
 import Input from '../../components/Input/index.tsx';
 import { ErrorSpan, FormType, NewUser, NewUserLink, PageSubtitle, PageTitle, PasswordForgot, SubmitButton } from './styles.ts';
@@ -94,7 +94,7 @@ const Login = () => {
                     <div className="success-message">Login bem-sucedido!</div>
                   )}
 
-                <PasswordForgot to={'/password-forgot'}>Esqueceu a senha?</PasswordForgot>
+                <PasswordForgot to={'/forgot-password'}>Esqueceu a senha?</PasswordForgot>
                 {/* <Button label="Login" disabled={isSubmitting || !isValid} /> */}
                 <SubmitButton disabled={isSubmitting || !isValid}>
                   Entrar

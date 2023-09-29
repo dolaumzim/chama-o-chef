@@ -1,6 +1,7 @@
 interface ButtonProps {
-  disabled: boolean;
+  disabled?: boolean;
   label: string;
+  
 }
 
 const Button = ({ disabled=true, label }:ButtonProps) => {

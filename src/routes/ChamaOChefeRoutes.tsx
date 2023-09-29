@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import ForgotPassword from '../pages/ForgotPassword';
+import RecoverPassword from '../pages/RecoverPassword';
 import Home from '../pages/Home';
 import { AuthFormLayout } from '../components/AuthFormLayout';
 import { SignUp } from '../pages/SignUp';
@@ -14,7 +15,10 @@ const ChamaOChefeRoutes = () => {
       <Route element={<AuthFormLayout />}>
         <Route path="/login" element={<Login />} />
       </Route>
-      {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
+      <Route element={<AuthFormLayout/>}>
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/recover-password" element={<RecoverPassword />} />
+      </Route>
       <Route element={<AuthFormLayout />}>
         <Route path="/signup" element={<SignUp />} />
       </Route>
