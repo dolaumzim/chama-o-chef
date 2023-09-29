@@ -7,11 +7,12 @@ export const getClientTelephones = (
   per_page: number = 25,
   number?: number
 ) => {
-  return apiChef.get<Props.ClientTelephone[]>(backendRoutesApi.clients.telephones, {
+  const response = apiChef.get<Props.ClientTelephone[]>(backendRoutesApi.clients.telephones, {
     params: {
       page,
       per_page,
       number
     }
   });
+  return response
 };
