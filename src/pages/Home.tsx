@@ -27,6 +27,7 @@ const Home: React.FC = () => {
       <SectionMapHome />
       <NearbyDishes />
       <FavoriteDishes />
+      <SectionDishes />
       {/* <AllDishes /> */}
     </div>
   );
