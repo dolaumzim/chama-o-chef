@@ -32,15 +32,9 @@ interface PropsDish {
   restaurantName: string;
   rating: string;
   isFavorite?: boolean;
-  onToggleFavorite?: () => void;
 }
 
 export const Dish = (data: PropsDish) => {
-  const toggleFavorite = () => {
-    if (data.onToggleFavorite) {
-      data.onToggleFavorite();
-    }
-  };
 
   return (
     <DishContainer>
@@ -52,7 +46,7 @@ export const Dish = (data: PropsDish) => {
         <StyledParagraph>{data.restaurantName}</StyledParagraph>
         <StyledSecondParagraph>
           R$ {data.price}
-          <FavoriteButton isFavorite={data.isFavorite} onClick={toggleFavorite}>
+          <FavoriteButton isFavorite={data.isFavorite}>
             <img
               src={data.isFavorite ? heartRedIcon : heartBlueIcon}
               alt="HeartIcon"
