@@ -30,11 +30,16 @@ const Login = () => {
       const response = await postLoginRequest({
         user
       } as PropsServices.PropsLogin);
+
       const token = response.data.access_token;
       const refresh_token = response.data.refresh_token;
 
       localStorage.setItem('token', token);
       localStorage.setItem('refresh_token', refresh_token);
+      const exp_date = new Date();
+      exp_date.setMinutes(exp_date.getMinutes() + 1);
+      localStorage.setItem('exp_date', exp_date.toString());
+
       setLoginSuccess(true);
       navigate(`/home`);
     } catch (error) {
