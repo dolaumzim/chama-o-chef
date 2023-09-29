@@ -6,7 +6,7 @@ import {
   StyledSecondParagraph,
   StyledTitle
 } from './styles';
-import star from '../../assets/Star.svg';
+import star from '../../assets/star.svg';
 
 interface PropsDish {
   image: string;

@@ -22,9 +22,9 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header action={activeColor} />
-      <SectionDishes />
       <NearbyDishes />
       <FavoriteDishes />
+      <SectionDishes />
       {/* <AllDishes /> */}
     </div>
   );
