@@ -87,9 +87,10 @@ const FavoriteDishes = () => {
       name: item.name,
       price: item.unit_price,
       restaurantName: item.chef.name,
-      rating: item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0'
-    })),
-    onToggleFavorite: handleToggleFavorite
+      rating: item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0',
+      isFavorite: true,
+      onToggleFavorite: () => handleToggleFavorite(item.id, true)
+    }))
   };
 
   return (
