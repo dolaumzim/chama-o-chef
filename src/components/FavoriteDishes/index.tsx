@@ -1,84 +1,23 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { backendRoutesApi } from '../../services';
 import { DishData } from '../../services/structure';
 import Carousel, { CarouselProps } from '../Carousel';
+import { getDishes } from '../../services/Dishes/getDishes';
 
 const FavoriteDishes = () => {
   const [favoriteDishes, setFavoriteDishes] = useState<DishData[]>([]);
-  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    axios
-      .get(
-        `http://academy-react.rarolabs.com.br/api/v1${backendRoutesApi.dishes}/?favorites=true`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      .then(response => {
-        if (response.status === 200) {
-          setFavoriteDishes(response.data.data);
-        } else {
-          throw new Error('Erro na solicitação da API');
-        }
-      })
-      .catch(error => {
-        console.error(
-          'Erro ao buscar dados da API:',
-          error.response ? error.response.data : error.message
-        );
-      });
-  }, [token]);
-
-  const handleToggleFavorite = async (dishId: string, isFavorite: boolean) => {
-    const action = isFavorite ? 'dislike' : 'like';
+  const getFavorites = async () => {
     try {
-      await axios.post(
-        `http://academy-react.rarolabs.com.br/api/v1${backendRoutesApi.dish}/${dishId}/${action}`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
-
-      if (isFavorite) {
-        setFavoriteDishes(prevFavoriteDishes =>
-          prevFavoriteDishes.filter(dish => dish.id !== dishId)
-        );
-      } else {
-        const response = await axios.get(
-          `http://academy-react.rarolabs.com.br/api/v1${backendRoutesApi.dishes}/?favorites=true`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        );
-        if (response.status === 200) {
-          setFavoriteDishes(response.data.data);
-        } else {
-          throw new Error('Erro na solicitação da API');
-        }
-      }
+      const favoritesResponse = await getDishes({ favorites: true });
+      setFavoriteDishes(favoritesResponse.data);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error(
-          'Erro ao favoritar/desfavoritar o prato:',
-          error.response ? error.response.data : error.message
-        );
-      } else {
-        console.error(
-          'Erro desconhecido ao favoritar/desfavoritar o prato:',
-          error
-        );
-      }
+      console.error('Erro ao buscar dados da API');
     }
   };
+
+  useEffect(() => {
+    getFavorites();
+  }, []);
 
   const carouselData: CarouselProps = {
     items: favoriteDishes.map(item => ({
@@ -88,15 +27,14 @@ const FavoriteDishes = () => {
       price: item.unit_price,
       restaurantName: item.chef.name,
       rating: item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0',
-      isFavorite: true,
-      onToggleFavorite: () => handleToggleFavorite(item.id, true)
+      isFavorite: true
     }))
   };
 
   return (
     <div>
       <h2>Pratos Favoritos</h2>
-      <Carousel {...carouselData} onToggleFavorite={handleToggleFavorite} />
+      <Carousel {...carouselData} />
     </div>
   );
 };
