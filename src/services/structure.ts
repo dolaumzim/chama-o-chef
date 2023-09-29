@@ -1,3 +1,30 @@
+export interface ClientAddress {
+  id: string;
+  name: string;
+  public_place: string;
+  zip_code: number;
+  number: number;
+  neighborhood: string;
+  reference: string;
+  complement: string;
+  latitude: number;
+  longitude: number;
+  city_id: string;
+  addressable_type: string;
+  addressable_id: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ClientTelephone {
+  id: string;
+  number: number | null;
+  contactable_type: string;
+  contactable_id: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
 export interface PropsLogin {
   user: {
     email: string;
@@ -7,35 +34,24 @@ export interface PropsLogin {
     passwordConfirmation: string;
     created_at: Date;
     updated_at: Date;
-    telephones: {
-      id: string;
-      number: number;
-      contactable_type: string;
-      contactable_id: string;
-      created_at: Date;
-      updated_at: Date;
-    }[];
-
-    addresses: {
-      id: string;
-      name: string;
-      public_place: string;
-      zip_code: number;
-      number: number;
-      neighborhood: string;
-      reference: string;
-      complement: string;
-      latitude: number;
-      longitude: number;
-      city_id: string;
-      addressable_type: string;
-      addressable_id: string;
-      created_at: Date;
-      updated_at: Date;
-    }[];
+    telephones: ClientTelephone[];
+    addresses: ClientAddress[];
   };
   access_token: string;
   refresh_token: string;
+}
+
+export interface AddressAttributes {
+  name: string;
+  public_place: string;
+  zip_code: string;
+  number: number | null;
+  neighborhood: string;
+  reference: string;
+  complement: string;
+  city_id: string;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 export interface SignUpLocal {
@@ -46,18 +62,7 @@ export interface SignUpLocal {
   telephones_attributes: {
     number: number | null;
   }[];
-  addresses_attributes?: {
-    name: string;
-    public_place: string;
-    zip_code: string;
-    number: number | null;
-    neighborhood: string;
-    reference: string;
-    complement: string;
-    city_id: string;
-    latitude: number | null;
-    longitude: number | null;
-  }[];
+  addresses_attributes?: AddressAttributes[];
 }
 
 export interface PropsSignUp {
@@ -89,38 +94,34 @@ export interface PropsClient {
   email: string;
   created_at: Date;
   updated_at: Date;
-  telephones: {
-    id: string;
-    number: number;
-    contactable_type: string;
-    contactable_id: string;
-    created_at: Date;
-    updated_at: Date;
-  };
-
-  addresses: {
-    id: string;
-    name: string;
-    public_place: string;
-    zip_code: number;
-    number: number;
-    neighborhood: string;
-    reference: string;
-    complement: string;
-    latitude: string;
-    longitude: string;
-    city_id: string;
-    addressable_type: string;
-    addressable_id: string;
-    created_at: Date;
-    updated_at: Date;
-  };
+  telephones: ClientTelephone[];
+  addresses: ClientAddress[];
 }
+
+export interface ClientAddresses {
+  data: ClientAddress[];
+  meta: Meta;
+}
+
+export interface Meta {
+  current_page: number;
+  previous_page: number | null; //não tenho certeza se é number, na api é só null
+  next_page: number | null; //não tenho certeza se é number, na api é só null
+  items_per_page: number;
+  total_pages: number;
+  total_items: number;
+}
+
 export interface Category {
   id: string;
   name: string;
   created_at: string;
   updated_at: string;
+}
+
+export interface Categories {
+  data: Category[];
+  meta: Meta;
 }
 
 export interface Rating {
@@ -175,4 +176,72 @@ export interface DishData {
 
 export interface DishesApiResponse {
   data: DishData[];
+}
+
+export interface StateData {
+  id: string;
+  name: string;
+  acronym: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface StatesData {
+  data: StateData[];
+  meta: Meta;
+}
+
+export interface City {
+  id: string;
+  name: string;
+  state_id: string;
+  created_at: Date;
+  updated_at: Date;
+  state: StateData;
+}
+
+export interface Cities {
+  data: City[];
+  meta: Meta;
+}
+
+export interface Telephone {
+  id: string;
+  number: string;
+  contactable_type: string;
+  contactable_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Address {
+  id: string;
+  name: string;
+  public_place: string;
+  zip_code: string;
+  number: string;
+  neighborhood: string;
+  reference: string;
+  complement: string;
+  latitude: number;
+  longitude: number;
+  city_id: string;
+  addressable_type: string;
+  addressable_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DataChefs {
+  id: string;
+  name: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+  address: Address;
+  telephones: Telephone[];
+}
+
+export interface DataChefResponse {
+  data: DataChefs[];
 }

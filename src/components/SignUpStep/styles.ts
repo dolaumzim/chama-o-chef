@@ -119,19 +119,8 @@ export const StepGo = styled.div`
     justify-content: end;
     align-items: center;
     width: 90%;
-    gap: 20px;
+    gap: 4.5vw;
     color: #959595;
     font-size: 15px;
     font-weight: 300;
     `
-
-export const StepBack = styled.div`
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 90%;
-    gap: 20px;
-    color: #959595;
-    font-size: 15px;
-    font-weight: 300;
-`

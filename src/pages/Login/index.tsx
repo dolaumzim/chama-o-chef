@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import '../stylesteste.css';
 import * as Props from './structure.ts';
 import { postLoginRequest } from '../../services/Auth/postLogin.ts';
-// import {Button} from '../../components/Button.tsx/index.tsx';
+// import  {Button } from '../../components/Button';
 import * as PropsServices from '../../services/structure.ts';
-import Input from '../../components/Input/index.tsx';
+import { Input } from '../../components/Input';
 import { ErrorSpan, FormType, NewUser, NewUserLink, PageSubtitle, PageTitle, PasswordForgot, SubmitButton } from './styles.ts';
+import { frontEndRoutes } from '../../routes/index.ts';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,9 +30,16 @@ const Login = () => {
       const response = await postLoginRequest({
         user
       } as PropsServices.PropsLogin);
+
       const token = response.data.access_token;
+      const refresh_token = response.data.refresh_token;
 
       localStorage.setItem('token', token);
+      localStorage.setItem('refresh_token', refresh_token);
+      const exp_date = new Date();
+      exp_date.setMinutes(exp_date.getMinutes() + 1);
+      localStorage.setItem('exp_date', exp_date.toString());
+
       setLoginSuccess(true);
       navigate(`/home`);
     } catch (error) {
@@ -59,7 +67,7 @@ const Login = () => {
               isValid
             }) => (
               <FormType>
-                  <img src="public/Logo Login.svg" alt="" />
+                  <img src="/Logo Login.svg" alt="" />
                   <PageTitle>Acesse sua conta</PageTitle>
                   <PageSubtitle>Insira seus dados abaixo para realizar o Login</PageSubtitle>
                 
@@ -94,8 +102,7 @@ const Login = () => {
                     <div className="success-message">Login bem-sucedido!</div>
                   )}
 
-                <PasswordForgot to={'/forgot-password'}>Esqueceu a senha?</PasswordForgot>
-                {/* <Button label="Login" disabled={isSubmitting || !isValid} /> */}
+                <PasswordForgot to={frontEndRoutes.forgotPassword}>Esqueceu a senha?</PasswordForgot>
                 <SubmitButton disabled={isSubmitting || !isValid}>
                   Entrar
                 </SubmitButton>

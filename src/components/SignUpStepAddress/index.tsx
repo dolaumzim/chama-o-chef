@@ -1,4 +1,4 @@
-import Input from '../Input/index.tsx';
+import { Input } from '../Input';
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Formik } from 'formik';
 import {
@@ -24,7 +24,7 @@ import { postSignUpRequest } from '../../services/Auth/postSignUp.ts';
 import {
   SignUpStepAddressProps,
   dataSchema,
-  newAddress
+  emptyAddresses,
 } from './structures.ts';
 import { useState } from 'react';
 
@@ -54,6 +54,8 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
     try {
       setSignUpError(false);
       const response = await postSignUpRequest(values);
+      console.log(response)
+      setAddresses(emptyAddresses)
       if (response.status === 200) navigate('/login');
     } catch (error) {
       console.log(error);
@@ -72,18 +74,19 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
           <PageTitle>Cadastre-se</PageTitle>
           <Input
             type="text"
-            name="zip_code"
+            name="addresses_attributes[0].zip_code"
             placeholder="CEP"
             maxLength={8}
-            onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
+            value={values.addresses_attributes && values.addresses_attributes[0].zip_code}
+            onFocus={()=>{if(values.addresses_attributes===undefined) setFieldValue('addresses_attributes[0].zip_code', '')}}
+            onChange={async(e:any)=> {
+              setFieldValue('addresses_attributes[0].zip_code', e.target.value)
               if (e.target.value.length === 8) {
                 const response = await handleZipCode(e);
                 if (response) {
-                  setFieldValue('addresses_attributes[0]', newAddress);
-                  setFieldValue('addresses_attributes[0]', response);
                   setFieldValue(
-                    'addresses_attributes[0].zip_code',
-                    response.cep
+                    'addresses_attributes[0].city_id',
+                    response.city_id
                   );
                   setFieldValue(
                     'addresses_attributes[0].latitude',
@@ -97,9 +100,20 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
                     'addresses_attributes[0].public_place',
                     response.street
                   );
-                }
-              }
-            }}
+                  setFieldValue(
+                    'addresses_attributes[0].neighborhood',
+                    response.neighborhood
+                  );
+                  setFieldValue(
+                    'addresses_attributes[0].reference',
+                    ''
+                  );
+                  setFieldValue(
+                    'addresses_attributes[0].complement',
+                    ''
+                  );
+                }}}
+            }
           />
           {cepError ? <span> CEP inválido </span> : null}
           <ErrorMessage name="addresses_attributes[0].zip_code" />
@@ -125,7 +139,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
           <NumberComplement>
             <NumberContainer>
               <Input
-                type="number"
+                type="text"
                 name="addresses_attributes[0].number"
                 placeholder="Número"
               />
@@ -187,7 +201,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
               &lt;
             </StepButton>
           </StepBack>
-          <SubmitButton>
+          <SubmitButton onClick={()=> console.log(values)}>
             Criar Conta
           </SubmitButton>
           <CancelAddress
@@ -195,6 +209,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
             onClick={() => {
               delete values.addresses_attributes;
               handleSteps(values);
+              setAddresses(emptyAddresses)
             }}
           >
             Mudei de idiea, não quero cadastrar endereço agora...

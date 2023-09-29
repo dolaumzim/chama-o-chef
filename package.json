@@ -14,13 +14,16 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@types/react-modal": "^3.16.1",
+    "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.0",
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.15.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "slick-slider": "^1.8.2",
     "styled-components": "^6.0.8",
     "yup": "^1.2.0"
   },
@@ -35,6 +38,7 @@
     "@types/jest": "^29.5.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react-slick": "^0.23.10",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",

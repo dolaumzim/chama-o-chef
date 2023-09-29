@@ -3,7 +3,8 @@ import {
   DishInfo,
   ImgDish,
   StyledParagraph,
-  StyledSecondParagraph
+  StyledSecondParagraph,
+  StyledTitle
 } from './styles';
 import star from '../../assets/star.svg';
 
@@ -22,9 +23,10 @@ export const Dish = (data: PropsDish) => {
         <img src={data.image} alt={data.name} />
       </ImgDish>
       <DishInfo>
-        <h2>{data.name}</h2>
+        <StyledTitle>{data.name}</StyledTitle>
         <StyledParagraph>{data.restaurantName}</StyledParagraph>
         <StyledSecondParagraph>
+          R$
           {data.price}
           <span>
             <img src={star} /> {data.rating}

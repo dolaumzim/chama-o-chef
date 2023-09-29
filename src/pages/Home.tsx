@@ -4,6 +4,7 @@ import FavoriteDishes from '../components/FavoriteDishes';
 // import AllDishes from '../components/AllDishes';
 import Header from '../components/Header';
 import { SectionDishes } from '../components/SectionDishes';
+import { SectionMapHome } from '../components/SectionMap';
 
 const Home: React.FC = () => {
   const [activeColor, setActiveColor] = useState(false);
@@ -23,8 +24,10 @@ const Home: React.FC = () => {
     <div>
       <Header action={activeColor} />
       <SectionDishes />
+      <SectionMapHome />
       <NearbyDishes />
       <FavoriteDishes />
+      <SectionDishes />
       {/* <AllDishes /> */}
     </div>
   );

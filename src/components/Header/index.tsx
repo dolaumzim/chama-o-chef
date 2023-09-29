@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
       </ImgLogo>
 
       <Menu>
-        <InputFind />
+        <InputFind value={''} onChange={() => {}} placeholder="Busca" />
         <div className="menu-container" ref={menuRef}>
           <div
             className="menu-trigger"
