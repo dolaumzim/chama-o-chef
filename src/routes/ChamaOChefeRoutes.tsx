@@ -8,10 +8,11 @@ import { SignUp } from '../pages/SignUp';
 import { frontEndRoutes } from '.';
 import { DishDetails } from '../pages/DishDetails';
 // import { Locationteste } from '../pages/locationteste';
-// import { UserProfile } from '../pages/UserProfile';
+import { UserProfile } from '../pages/UserProfile';
 
 const ChamaOChefeRoutes = () => {
-  // if(logged)
+
+// if(logged) 
   return (
     <Routes>
       <Route element={<PublicSectionLayout />}>
@@ -33,7 +34,7 @@ const ChamaOChefeRoutes = () => {
         return (
         <Routes> */}
       <Route path={frontEndRoutes.home} element={<Home />} />
-      {/* <Route path={frontEndRoutes.userProfile} element={<UserProfile/>} /> */}
+      <Route path={frontEndRoutes.userProfile} element={<UserProfile/>} />
       <Route path={frontEndRoutes.dish(':id')} element={<DishDetails />} />
       <Route path="/*" element={<Navigate replace to={'/login'} />} />
     </Routes>

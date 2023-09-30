@@ -6,6 +6,8 @@ import imgLogo from '../../assets/imgLogo.svg';
 import { useEffect, useRef, useState } from 'react';
 import { InputFind } from '../InputFind';
 import { DropdownItem } from '../DropdownIcon/DropdownItem';
+import { Link, redirect, useNavigate } from 'react-router-dom';
+import { frontEndRoutes } from '../../routes';
 
 type HeaderProps = {
   action: boolean;
@@ -14,6 +16,7 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -33,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
   return (
     <StyledHeader className={action ? 'activeColor' : ''}>
       <Logo>
-        <img src={logo} alt="name logo" />
+        <Link to={frontEndRoutes.home}><img src={logo} alt="name logo"/></Link>
         <ul>
           <li>
             {/* Implementar o Link do Router */}
@@ -47,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
       </Logo>
 
       <ImgLogo>
-        <img src={imgLogo} alt="" />
+      <Link to={frontEndRoutes.home}><img src={imgLogo} alt="" /></Link>
       </ImgLogo>
 
       <Menu>
@@ -66,10 +69,10 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
           <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
             <h3>Olá, {'data.user'}</h3>
             <ul>
-              <DropdownItem img={user} text={'Pedidos'} />
-              <DropdownItem img={user} text={'Pagamentos'} />
-              <DropdownItem img={user} text={'Meus dados'} />
-              <DropdownItem img={user} text={'Sair'} />
+              <DropdownItem img={user} text={'Pedidos'} link='' />
+              <DropdownItem img={user} text={'Pagamentos'} link='' />
+              <DropdownItem img={user} text={'Meus dados'} link='/profile' />
+              <DropdownItem img={user} text={'Sair'} link='' />
             </ul>
           </div>
         </div>

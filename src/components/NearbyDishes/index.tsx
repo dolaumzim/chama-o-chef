@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { backendRoutesApi } from '../../services';
-import axios from 'axios';
 import { DishData } from '../../services/structure';
 import Carousel, { CarouselProps } from '../Carousel';
+import { getDishes } from '../../services/Dishes/getDishes';
 
 const getUserLocation = () => {
   return {
@@ -15,35 +14,20 @@ const getUserLocation = () => {
 
 const NearbyDishes = () => {
   const [dishes, setDishes] = useState<DishData[]>([]);
-  const token = localStorage.getItem('token');
+
+  const getNearby = async (latitude : number, longitude : number) => {
+    try {
+    const nearbyResponse = await getDishes({latitude : latitude, longitude : longitude})
+    setDishes(nearbyResponse.data)
+  } catch (error) {
+    console.error('Erro ao buscar dados da API')
+  }}
 
   useEffect(() => {
     const userLocation = getUserLocation();
 
-    axios
-      .get(
-        `http://academy-react.rarolabs.com.br/api/v1${backendRoutesApi.dishes}`,
-        {
-          params: {
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      .then(response => {
-        if (response.status === 200) {
-          setDishes(response.data.data);
-        } else {
-          throw new Error('Erro na solicitação da API');
-        }
-      })
-      .catch(error => {
-        console.error('Erro ao buscar dados da API:', error);
-      });
-  }, [token]);
+    getNearby(userLocation.latitude, userLocation.longitude)
+  }, []);
 
   const carouselData: CarouselProps = {
     items: dishes.map(item => ({
@@ -59,7 +43,7 @@ const NearbyDishes = () => {
   return (
     <div>
       <h2>Pratos Próximos</h2>
-      <Carousel {...carouselData} />
+      <Carousel {...carouselData}/>
     </div>
   );
 };

@@ -1,15 +1,16 @@
-import { DropDownItem } from './styles';
+import { DropDownItem, DropDownLink } from './styles';
 
 interface PropsDownItem {
   img: string;
   text: string;
+  link : string
 }
 
 export const DropdownItem = (props: PropsDownItem) => {
   return (
     <DropDownItem>
       <img src={props.img}></img>
-      <a> {props.text} </a>
+      <DropDownLink to={props.link}> {props.text} </DropDownLink>
     </DropDownItem>
   );
 };
