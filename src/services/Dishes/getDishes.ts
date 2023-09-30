@@ -11,31 +11,32 @@ export interface GetDishesOptions {
   favorites?: boolean;
 }
 
-export const getDishes = async (options: GetDishesOptions = {}) => {
+export const getDishes = async (
+  options : GetDishesOptions={}
+) => {
   try {
     const {
       page = 1,
-      per_page = 15,
+      per_page= 15,
       term,
       latitude,
       longitude,
       categories,
-      favorites
-    } = options;
-
+      favorites,
+    } = options
+    
     const response = await apiChef.get(backendRoutesApi.dishes, {
-      params: {
-        page,
-        per_page,
-        term,
-        latitude,
-        longitude,
-        categories,
-        favorites
-      }
-    });
-    console.log(response.data);
-    return response.data;
+    params: {
+      page,
+      per_page,
+      term,
+      latitude,
+      longitude,
+      categories,
+      favorites,
+    }
+  })
+  return response.data
   } catch (error) {
     console.log(error);
     throw new Error('Erro de requisição');

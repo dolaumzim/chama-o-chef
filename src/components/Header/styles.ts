@@ -165,11 +165,6 @@ export const Menu = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  .dropdown-menu ul li:hover a {
-    color: rgb(212, 33, 9);
-    cursor: pointer;
-  }
-
   .dropdown-menu ul li:hover img {
     opacity: 1;
     cursor: pointer;

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { keyframes, styled } from 'styled-components';
+import { Button } from '../Button';
 
 export const StyledSection = styled.section`
   display: flex;
@@ -56,11 +57,7 @@ const rotate = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-type ButtonProps = {
-  loading: boolean;
-};
-
-export const Button = styled.button<ButtonProps>`
+export const ButtonLoad = styled(Button)`
   width: 100%;
   border: 1px solid #f5f0eb;
   background: #fff;

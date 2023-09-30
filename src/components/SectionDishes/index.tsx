@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { Dish } from '../Dish';
 import {
-  Button,
+  ButtonLoad,
   StyledAllDishes,
   StyledListDish,
   StyledSection,
@@ -22,7 +22,9 @@ export const SectionDishes: React.FC = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(
       ['/dishes', [debouncedTitle]],
-      ({ pageParam = 1 }) => getDishes(pageParam, perPage, debouncedTitle),
+      ({ pageParam = 1 }) => getDishes(!debouncedTitle ? 
+        {page: pageParam, per_page: perPage, term: debouncedTitle} : 
+        {page: pageParam, per_page: 50, term: debouncedTitle}),
       {
         getNextPageParam: lastPage => {
           return lastPage.meta.next_page;
@@ -70,13 +72,13 @@ export const SectionDishes: React.FC = () => {
         {items?.length === 0 && !isLoading && <p>Nenhum prato encontrado.</p>}
       </StyledListDish>
       {hasNextPage && !title && (
-        <Button
+        <ButtonLoad
           onClick={handleFetchNextPage}
           disabled={isFetchingNextPage}
           loading={isFetchingNextPage}
         >
           {isFetchingNextPage ? '' : 'Ver mais'}
-        </Button>
+        </ButtonLoad>
       )}
     </StyledSection>
   );
