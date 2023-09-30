@@ -2,8 +2,9 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Input from '../../components/Input';
+import { Input } from '../../components/Input';
 import { FormType, PageSubtitle, PageTitle, SubmitButton } from './styles.ts';
+import axios from 'axios';
 
 const validationSchema = Yup.object().shape({
   code: Yup.string().required('Código de recuperação é obrigatório'),
@@ -29,28 +30,26 @@ const RecoverPassword: React.FC = () => {
     try {
       await validationSchema.validate(values, { abortEarly: false });
   
-      const response = await fetch('http://academy-react.rarolabs.com.br/api/v1/passwords/reset', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          reset_password_token: values.code,
-          password: values.password,
-          password_confirmation: values.confirmPassword,
-        }),
-      });
-  
-      if (response.ok) {
-        navigate('/login');
-      } else {
-        console.error('Erro ao redefinir a senha');
-        alert('Algo deu errado. Por favor, tente novamente mais tarde.');
-      }
-    } catch (error) {
-      console.error('Erro de validação:', error);
+      const response = await axios.put('http://academy-react.rarolabs.com.br/api/v1/passwords/reset', {
+      reset_password_token: values.code,
+      password: values.password,
+      password_confirmation: values.confirmPassword,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 204) {
+      navigate('/login');
+    } else {
+      console.error('Erro ao redefinir a senha');
+      alert('Algo deu errado. Por favor, tente novamente mais tarde.');
     }
-  };
+  } catch (error) {
+    console.error('Erro de validação:', error);
+  }
+};
 
   return (
     <Formik

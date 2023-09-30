@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../components/Input';
+import { Input } from '../../components/Input';
 import { FormType, PageTitle, PageSubtitle, SubmitButton   } from './styles.ts';
+import axios from 'axios';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -18,30 +19,27 @@ const ForgotPassword: React.FC = () => {
   const handleRecoverPassword = async (values: { email: string }) => {
     try {
       await validationSchema.validate(values, { abortEarly: false });
-
-      const response = await fetch('http://academy-react.rarolabs.com.br/api/v1/passwords/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: values.email }),
+  
+      const response = await axios.post('http://academy-react.rarolabs.com.br/api/v1/passwords/token', {
+        email: values.email,
       });
+  
       console.log('Response Status:', response.status);
-
-      if (response.ok) {
-        const responseData = await response.json();
+  
+      if (response.status === 200) {
+        const responseData = response.data;
         setRecoveryToken(responseData.reset_password_token); // Set the recovery token
         alert('ESTE É SEU TOKEN DE RECUPERAÇÃO, ANOTE COM CARINHO 🫶🏽: ' + responseData.reset_password_token); // Test with a simple alert
         navigate(`/recover-password?email=${values.email}`);
       } else {
-        const responseData = await response.json(); 
-        console.error('Error Response:', responseData);
+        console.error('Error Response:', response.data);
         alert('Algo deu errado. Por favor, tente novamente mais tarde.');
-      }    
+      }
     } catch (error) {
       console.error('Erro de validação:', error);
     }
   };
+  
 
   return (
     <Formik
