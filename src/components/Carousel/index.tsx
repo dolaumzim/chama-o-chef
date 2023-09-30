@@ -2,9 +2,15 @@ import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Dish } from '../Dish';
-import './styles.css'
-import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
-import { IconContext } from 'react-icons';
+import {
+  CarouselButtonContainer,
+  CarouselButtonIcon,
+  CarouselButtonLeftArrow,
+  CarouselButtonRightArrow,
+  Inner,
+  Outer
+} from './styled';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 interface CustomArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -29,9 +35,21 @@ const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
   onClick,
   direction
 }) => (
-  <button className={`customCarouselButton-${direction}`} onClick={onClick}>
-    {direction === 'next' ? <BsArrowRightCircle/> : <BsArrowLeftCircle/>}
-  </button>
+  <CarouselButtonContainer onClick={onClick}>
+    {direction === 'next' ? (
+      <CarouselButtonRightArrow>
+        <CarouselButtonIcon>
+          <FaChevronRight />
+        </CarouselButtonIcon>
+      </CarouselButtonRightArrow>
+    ) : (
+      <CarouselButtonLeftArrow>
+        <CarouselButtonIcon>
+          <FaChevronLeft />
+        </CarouselButtonIcon>
+      </CarouselButtonLeftArrow>
+    )}
+  </CarouselButtonContainer>
 );
 
 const Carousel = ({ items }: CarouselProps) => {
@@ -50,30 +68,22 @@ const Carousel = ({ items }: CarouselProps) => {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#F58100", className: "global-class-name", size: '50px' }}>
-  
-
-    <div style={{display:'flex', justifyContent:'center', marginLeft:'10vw'}}>
-      <div style={{width: '80%'}}>
-        <Slider {...settings} >
-            {items.map((item, index) => (
-              <Dish
-                key={index}
-                image={item.image}
-                name={item.name}
-                price={item.price}
-                restaurantName={item.restaurantName}
-                rating={item.rating}
-                
-              />
-            ))}
-      
+    <Outer>
+      <Inner>
+        <Slider {...settings}>
+          {items.map((item, index) => (
+            <Dish
+              key={index}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              restaurantName={item.restaurantName}
+              rating={item.rating}
+            />
+          ))}
         </Slider>
-        
-      </div>
-      
-    </div>
-    </IconContext.Provider>
+      </Inner>
+    </Outer>
   );
 };
 

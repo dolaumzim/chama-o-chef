@@ -34,7 +34,11 @@ const FavoriteDishes = () => {
   return (
     <div>
       <h2>Pratos Favoritos</h2>
-      <Carousel {...carouselData} />
+      {favoriteDishes.length === 0 ? (
+        <p>Ainda sem pratos favoritos.</p>
+      ) : (
+        <Carousel {...carouselData} />
+      )}
     </div>
   );
 };
