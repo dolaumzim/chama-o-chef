@@ -37,7 +37,7 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('refresh_token', refresh_token);
       const exp_date = new Date();
-      exp_date.setMinutes(exp_date.getMinutes() + 1);
+      exp_date.setMinutes(exp_date.getMinutes() + 55);
       localStorage.setItem('exp_date', exp_date.toString());
 
       setLoginSuccess(true);
