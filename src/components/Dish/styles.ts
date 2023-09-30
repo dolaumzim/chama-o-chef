@@ -5,13 +5,15 @@ export const DishContainer = styled.div`
   height: 200px;
   flex-shrink: 0;
   margin-top: 50px;
-  border-radius: 10px;
-  background: #f0f0f0;
+  border-radius: 5px 5px 10px 10px;
+  /* background: #f0f0f0; */
+  background: #aeaebe35;
   position: relative;
   transition: transform 0.4s ease-in-out;
+  cursor: pointer;
   &:hover {
     transform: scale(1.02);
-    box-shadow: 2px 3px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -36,7 +38,7 @@ export const DishInfo = styled.div`
   left: 10px;
   right: 10px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px 5px 10px 10px;
   background: #fff;
 `;
 

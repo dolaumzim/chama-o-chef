@@ -86,7 +86,7 @@ const Map: React.FC<MapProps> = ({ page, restaurant, user }) => {
       });
       directionsRenderer.setMap(map);
 
-      if (page === 'details' && restaurant) {
+      if (page === 'details' && restaurant[0]) {
         directionsService.route(
           {
             origin: user,
@@ -108,6 +108,18 @@ const Map: React.FC<MapProps> = ({ page, restaurant, user }) => {
                   scaledSize: new window.google.maps.Size(50, 50)
                 }
               });
+              new window.google.maps.Marker({
+                position: result?.routes[0].legs[0].end_location,
+                map,
+                label: {
+                  text: restaurant[0].label,
+                  className: 'map-marker'
+                },
+                icon: {
+                  url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  scaledSize: new window.google.maps.Size(50, 50)
+                }
+              });
             } else {
               throw new Error(`Erro ao exibir ${result}`);
             }
@@ -126,7 +138,7 @@ const Map: React.FC<MapProps> = ({ page, restaurant, user }) => {
       onUnmount={onUnmount}
       mapContainerClassName="map-container"
     >
-      {page === 'home' ? (
+      {page === 'home' && (
         <Marker
           position={user}
           label={user.label}
@@ -141,8 +153,6 @@ const Map: React.FC<MapProps> = ({ page, restaurant, user }) => {
             scaledSize: new window.google.maps.Size(50, 50)
           }}
         />
-      ) : (
-        ''
       )}
       {restaurant.map((marker, index) => (
         <Marker

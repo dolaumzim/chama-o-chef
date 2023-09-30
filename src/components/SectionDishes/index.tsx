@@ -22,7 +22,12 @@ export const SectionDishes: React.FC = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery(
       ['/dishes', [debouncedTitle]],
-      ({ pageParam = 1 }) => getDishes(pageParam, perPage, debouncedTitle),
+      ({ pageParam = 1 }) =>
+        getDishes(
+          !debouncedTitle
+            ? { page: pageParam, per_page: perPage, term: debouncedTitle }
+            : { page: pageParam, per_page: 50, term: debouncedTitle }
+        ),
       {
         getNextPageParam: lastPage => {
           return lastPage.meta.next_page;
@@ -58,6 +63,7 @@ export const SectionDishes: React.FC = () => {
         {items?.map((item: Props.DishData, index: number) => (
           <Dish
             key={index}
+            id={item.id}
             image={item.images[0]}
             name={item.name}
             price={item.unit_price}

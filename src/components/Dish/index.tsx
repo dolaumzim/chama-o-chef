@@ -24,6 +24,8 @@ const FavoriteButton = styled(Button)<ButtonProps>`
     height: 15px;
   }
 `;
+import { Link } from 'react-router-dom';
+import { frontEndRoutes } from '../../routes';
 
 interface PropsDish {
   image: string;
@@ -35,28 +37,24 @@ interface PropsDish {
 }
 
 export const Dish = (data: PropsDish) => {
-
   return (
-    <DishContainer>
-      <ImgDish>
-        <img src={data.image} alt={data.name} />
-      </ImgDish>
-      <DishInfo>
-        <StyledTitle>{data.name}</StyledTitle>
-        <StyledParagraph>{data.restaurantName}</StyledParagraph>
-        <StyledSecondParagraph>
-          R$ {data.price}
-          <FavoriteButton isFavorite={data.isFavorite}>
-            <img
-              src={data.isFavorite ? heartRedIcon : heartBlueIcon}
-              alt="HeartIcon"
-            />
-          </FavoriteButton>
-          <span>
-            <img src={star} alt="StarIcon" /> {data.rating}
-          </span>
-        </StyledSecondParagraph>
-      </DishInfo>
-    </DishContainer>
+    <Link to={frontEndRoutes.dish(data.id)}>
+      <DishContainer>
+        <ImgDish>
+          <img src={data.image} alt={data.name} />
+        </ImgDish>
+        <DishInfo>
+          <StyledTitle>{data.name}</StyledTitle>
+          <StyledParagraph>{data.restaurantName}</StyledParagraph>
+          <StyledSecondParagraph>
+            R$
+            {data.price}
+            <span>
+              <img src={star} /> {data.rating}
+            </span>
+          </StyledSecondParagraph>
+        </DishInfo>
+      </DishContainer>
+    </Link>
   );
 };
