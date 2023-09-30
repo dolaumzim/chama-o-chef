@@ -245,3 +245,15 @@ export interface DataChefs {
 export interface DataChefResponse {
   data: DataChefs[];
 }
+
+export interface Chef {
+  id: string;
+  name: string;
+  email: string;
+  address: Address;
+  telephones: Telephone[];
+}
+
+export interface ChefResponse {
+  data: Chef;
+}

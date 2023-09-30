@@ -8,7 +8,7 @@ export const StyledHeader = styled.header`
   width: 100%;
   height: 70px;
   border-bottom: 1px solid transparent;
-  transition: all ease 0.3s;
+  transition: all ease 0.8s;
   background-color: rgb(0, 0, 0, 0.4);
   z-index: 1;
   background-color: ${props => (props.className ? 'rgb(0, 0, 0, 0.92)' : '')};
