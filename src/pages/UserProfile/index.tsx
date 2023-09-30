@@ -299,7 +299,7 @@ const [cityAndState, setCityAndState] = useState<AddressProps[]>([
                   >
                     {({ values, setFieldValue }) => (
                       <FormType>
-                        <Input type="text" name="telephone" placeholder="Telefone"/>
+                        <Input type="text" name="telephone" placeholder="Telefone" maxLength={11}/>
                         <AddCancel>
                           <Add
                             onClick={() => {
