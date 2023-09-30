@@ -8,3 +8,4 @@ export const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
     <Styled.Input {...props}/>
   );
 };
+

@@ -20,19 +20,25 @@ export interface CarouselProps {
   onToggleFavorite?: (dishId: string, isFavorite: boolean) => void;
 }
 
-const CustomCarouselButtons = ({ onClick, direction }: CustomArrowProps) => (
+const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
+  onClick,
+  direction
+}) => (
   <button className={`customCarouselButton-${direction}`} onClick={onClick}>
     {direction === 'next' ? 'Próximo' : 'Anterior'}
   </button>
 );
 
-const Carousel = ({ items }: CarouselProps) => {
+const Carousel = ({ items, onToggleFavorite }: CarouselProps) => {
+  const initialSlidesToShow = items?.length < 3 ? items?.length : 3;
+  const initialSlidesToScroll = items?.length < 3 ? items?.length : 3;
+
   const settings: Settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: initialSlidesToShow,
+    slidesToScroll: initialSlidesToScroll,
     nextArrow: <CustomCarouselButtons direction="next" />,
     prevArrow: <CustomCarouselButtons direction="prev" />
   };
@@ -47,6 +53,7 @@ const Carousel = ({ items }: CarouselProps) => {
           price={item.price}
           restaurantName={item.restaurantName}
           rating={item.rating}
+          onToggleFavorite={() => onToggleFavorite?.(item.id, true)}
         />
       ))}
     </Slider>
