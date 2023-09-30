@@ -45,7 +45,7 @@ export interface AddressAttributes {
   name: string;
   public_place: string;
   zip_code: string;
-  number: number | null;
+  number: number | null | string;
   neighborhood: string;
   reference: string;
   complement: string;
