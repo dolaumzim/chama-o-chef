@@ -12,6 +12,7 @@ import { Ratings } from '../../components/Ratings';
 import { putLikeDish } from '../../services/Dishes/putLikeDish';
 import { getChefDishes } from '../../services/Chefs/getChefDishes';
 import Carousel from '../../components/Carousel';
+import { putDislikeDish } from '../../services/Dishes/putDislikeDish';
 
 interface Location {
   label: string;
@@ -27,9 +28,8 @@ export const DishDetails = () => {
   const [counter, setCounter] = useState(0);
   const counterValue = useMemo(() => counter, [counter]);
   const [liked, setLiked] = useState<boolean | undefined>();
-  const [chefDishes, setChefDishes] = useState([]);
-
-  // const [carouselItems, setCarouselItems] = useState([]);
+  const [disliked, setDisliked] = useState<boolean | undefined>();
+  const [chefDishes, setChefDishes] = useState<Props.CarouselItemsProps[]>([]);
 
   const fetchDishData = useCallback(async () => {
     if (!id || dishData) {
@@ -63,11 +63,12 @@ export const DishDetails = () => {
         name: dish.name,
         price: dish.unit_price,
         restaurantName: dish.chef.name,
-        rating: dish.ratings.length > 0 ? dish.ratings[0].rate.toString() : '0'
+        rating: dish.ratings.length > 0 ? dish.ratings[0].rate.toString() : '0',
+        isFavorite: dish.liked_by_me,
       }));
       setChefDishes(carouselItems);
-      console.log('CarouselItems ', carouselItems);
     }
+    
   }, [dishData, cordChef]);
 
   const fetchClientData = useCallback(async () => {
@@ -88,6 +89,7 @@ export const DishDetails = () => {
     fetchChefData();
     fetchClientData();
     handleGetLike();
+    handleGetDislike();
   }, [fetchDishData, fetchChefData, fetchClientData]);
 
   useEffect(() => {
@@ -134,6 +136,20 @@ export const DishDetails = () => {
     }
   };
 
+  const handleGetDislike = () => {
+    if (dishData?.disliked_by_me) {
+      return setDisliked(dishData.disliked_by_me);
+    }
+  };
+
+  const handleDislike = async () => {
+    if (dishData?.id) {
+      await putDislikeDish(dishData.id);
+      const response = await getDish(dishData.id);
+      setDisliked(response.data.disliked_by_me);
+    }
+  };
+
   return (
     <>
       <Styled.Container>
@@ -159,7 +175,12 @@ export const DishDetails = () => {
                   {liked ? (
                     <Styled.Like onClick={handleLike} cursor={'pointer'} />
                   ) : (
-                    <Styled.Dislike onClick={handleLike} cursor={'pointer'} />
+                    <Styled.Unlike onClick={handleLike} cursor={'pointer'} />
+                  )}
+                   {disliked ? (
+                    <Styled.Dislike onClick={handleDislike} cursor={'pointer'} />
+                  ) : (
+                    <Styled.Undislike onClick={handleDislike} cursor={'pointer'} />
                   )}
 
                   <Styled.Price>{`R$ ${dishData.unit_price}`}</Styled.Price>
@@ -185,6 +206,7 @@ export const DishDetails = () => {
               </Styled.DetailsDish>
               <Map page={'details'} restaurant={cordChef} user={cordClient} />
               <h1>Peça também</h1>
+
               <Carousel items={chefDishes} />
 
               <h1>Avaliações</h1>

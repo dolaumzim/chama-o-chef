@@ -11,25 +11,12 @@ import {
   Outer
 } from './styled';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { CarouselProps } from '../../services/structure';
 
 interface CustomArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   direction: 'next' | 'prev';
 }
-
-export interface CarouselProps {
-  items: {
-    id: string;
-    image: string;
-    name: string;
-    price: string;
-    restaurantName: string;
-    rating: string;
-  }[];
-  onToggleFavorite?: (dishId: string, isFavorite: boolean) => void;
-}
-
-
 
 const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
   onClick,
@@ -80,6 +67,7 @@ const Carousel = ({ items }: CarouselProps) => {
               price={item.price}
               restaurantName={item.restaurantName}
               rating={item.rating}
+              isFavorite={item.isFavorite}
             />
           ))}
         </Slider>

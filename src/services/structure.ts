@@ -302,3 +302,18 @@ export interface RatingsProps {
   rate: number | null;
   comment: string;
 }
+
+export interface CarouselItemsProps {
+    id: string;
+    image: string;
+    name: string;
+    price: string;
+    restaurantName: string;
+    rating: string;
+    isFavorite: boolean;
+}
+
+export interface CarouselProps {
+  items: CarouselItemsProps[];
+  onToggleFavorite?: (dishId: string, isFavorite: boolean) => void;
+}

@@ -41,9 +41,7 @@ export const CartProvider = ({ children }: React.PropsWithChildren) => {
         const response = await getClient()
         setUserData(response)
         setLoading(false)
-        console.log('pegou effect')
       } catch (error) {
-        console.log(error)
         setLoading(false)
       }
     }

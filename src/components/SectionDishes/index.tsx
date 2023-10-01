@@ -71,6 +71,7 @@ export const SectionDishes: React.FC = () => {
             rating={
               item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0'
             }
+            isFavorite={item.liked_by_me}
           />
         ))}
         {items?.length === 0 && !isLoading && <p>Nenhum prato encontrado.</p>}

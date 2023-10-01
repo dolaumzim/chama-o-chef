@@ -17,6 +17,9 @@ interface ButtonProps {
 }
 
 const FavoriteButton = styled(Button)<ButtonProps>`
+  position:absolute;
+  top:10px;
+  right:10px;
   background-color: transparent;
   cursor: pointer;
   img {
@@ -34,28 +37,53 @@ interface PropsDish {
   price: string;
   restaurantName: string;
   rating: string;
-  isFavorite?: boolean;
+  isFavorite: boolean;
 }
+
 
 export const Dish = (data: PropsDish) => {
   return (
+    <>
+    {location.pathname.includes('home') || location.pathname.includes('alldishes') ? 
     <Link to={frontEndRoutes.dish(data.id)}>
       <DishContainer>
         <ImgDish>
           <img src={data.image} alt={data.name} />
         </ImgDish>
+        {data.isFavorite ? <FavoriteButton><img src={heartRedIcon} alt="" /></FavoriteButton>:
+        <FavoriteButton><img src={heartBlueIcon} alt="" /></FavoriteButton>}
         <DishInfo>
           <StyledTitle>{data.name}</StyledTitle>
           <StyledParagraph>{data.restaurantName}</StyledParagraph>
           <StyledSecondParagraph>
-            R$
-            {data.price}
+            {Number(data.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
             <span>
               <img src={star} /> {data.rating}
             </span>
           </StyledSecondParagraph>
         </DishInfo>
       </DishContainer>
-    </Link>
+    </Link> :
+    <Link to={frontEndRoutes.dish(data.id)} reloadDocument>
+    <DishContainer>
+      <ImgDish>
+        <img src={data.image} alt={data.name} />
+      </ImgDish>
+      {data.isFavorite ? <FavoriteButton><img src={heartRedIcon} alt="" /></FavoriteButton>:
+      <FavoriteButton><img src={heartBlueIcon} alt="" /></FavoriteButton>}
+      <DishInfo>
+        <StyledTitle>{data.name}</StyledTitle>
+        <StyledParagraph>{data.restaurantName}</StyledParagraph>
+        <StyledSecondParagraph>
+          {Number(data.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+          <span>
+            <img src={star} /> {data.rating}
+          </span>
+        </StyledSecondParagraph>
+      </DishInfo>
+    </DishContainer>
+  </Link>
+    }
+    </>
   );
 };
