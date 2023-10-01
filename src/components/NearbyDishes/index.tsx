@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { DishData } from '../../services/structure';
-import Carousel, { CarouselProps } from '../Carousel';
+import { CarouselProps, DishData } from '../../services/structure';
+import Carousel from '../Carousel';
 import { getDishes } from '../../services/Dishes/getDishes';
 import { useCart } from '../../contexts/CartContext';
 
@@ -43,7 +43,8 @@ const NearbyDishes = () => {
       name: item.name,
       price: item.unit_price,
       restaurantName: item.chef.name,
-      rating: item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0'
+      rating: item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0',
+      isFavorite : item.liked_by_me
     }))
   };
 

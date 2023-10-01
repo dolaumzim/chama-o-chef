@@ -34,7 +34,7 @@ const ChamaOChefeRoutes = () => {
     );
     else
     return (
-  <CartProvider>
+      <CartProvider>
         <Routes>
           {/* <Route path="/location" element={<Locationteste />} /> */}
           <Route path={frontEndRoutes.home} element={<Home />} />

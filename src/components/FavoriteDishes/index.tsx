@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { DishData } from '../../services/structure';
-import Carousel, { CarouselProps } from '../Carousel';
+import { CarouselProps, DishData } from '../../services/structure';
+import Carousel from '../Carousel';
 import { getDishes } from '../../services/Dishes/getDishes';
 
 const FavoriteDishes = () => {

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
+import { BsHeartbreak, BsHeartbreakFill } from 'react-icons/bs';
 
 export const Container = styled.section`
   width: 100%;
@@ -179,7 +180,17 @@ export const Like = styled(FcLike)`
   height: 40px;
 `;
 
-export const Dislike = styled(FcLikePlaceholder)`
+export const Unlike = styled(FcLikePlaceholder)`
+  width: 40px;
+  height: 40px;
+`;
+
+export const Dislike = styled(BsHeartbreakFill)`
+  width: 40px;
+  height: 40px;
+`;
+
+export const Undislike = styled(BsHeartbreak)`
   width: 40px;
   height: 40px;
 `;
