@@ -1,21 +1,17 @@
 import { Formik } from 'formik';
 import {  useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../stylesteste.css';
 import * as Props from './structure.ts';
 import { postLoginRequest } from '../../services/Auth/postLogin.ts';
-// import  {Button } from '../../components/Button';
 import * as PropsServices from '../../services/structure.ts';
 import { Input } from '../../components/Input';
-import { ErrorSpan, FormType, NewUser, NewUserLink, PageSubtitle, PageTitle, PasswordForgot, SubmitButton } from './styles.ts';
+import { ErrorSpan, FormType, NewUser, NewUserLink, PageSubtitle, PageTitle, PasswordForgot, SubmitButton, SuccessMessage } from './styles.ts';
 import { frontEndRoutes } from '../../routes/index.ts';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const [loginSuccess, setLoginSuccess] = useState(false);
-
-  const navigate = useNavigate();
 
   const onSubmit = async (values: Props.PropsLogin) => {
     try {
@@ -41,7 +37,8 @@ const Login = () => {
       localStorage.setItem('exp_date', exp_date.toString());
 
       setLoginSuccess(true);
-      navigate(`/home`);
+      window.location.href = frontEndRoutes.home;
+      
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       setLoginError('Email ou senha incorretos.');
@@ -99,12 +96,12 @@ const Login = () => {
 
                   {loginError && <ErrorSpan>{loginError}</ErrorSpan>}
                   {loginSuccess && (
-                    <div className="success-message">Login bem-sucedido!</div>
+                    <SuccessMessage>Login bem-sucedido!</SuccessMessage>
                   )}
 
                 <PasswordForgot to={frontEndRoutes.forgotPassword}>Esqueceu a senha?</PasswordForgot>
-                <SubmitButton disabled={isSubmitting || !isValid}>
-                  Entrar
+                <SubmitButton disabled={isSubmitting || !isValid} loading={isLoading}>
+                  {isLoading ? '' : 'Entrar'}
                 </SubmitButton>
 
               <NewUser>

@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {Form} from 'formik'
 import { Link } from "react-router-dom";
+import { Button } from "../../components/Button";
 
 export const FormType = styled(Form)`
     display:flex; 
@@ -22,9 +23,14 @@ export const PageSubtitle = styled.h2`
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-`
+    `
 
-export const SubmitButton = styled.button`
+    const rotate = keyframes`
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    `;
+
+export const SubmitButton = styled(Button)`
     color: #FFF;
     font-size: 20px;
     font-style: normal;
@@ -48,7 +54,18 @@ export const SubmitButton = styled.button`
         cursor: default;
         background-color: #868686;
     }
-`
+
+    &:after {
+    content: '';
+    display: ${props => (props.loading ? 'inline-block' : 'none')};
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: ${rotate} 1s linear infinite;
+  }
+  `
 
 export const NewUser = styled.span`
     color: #323232;
@@ -75,4 +92,10 @@ export const ErrorSpan = styled.span`
     color : red;
     font-size: 15px;
     font-weight: 400;
+`
+
+export const SuccessMessage = styled.div`
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
 `

@@ -44,14 +44,14 @@ import {
   SubInfosAddresses,
   DeleteContainer,
   FormTypeAddresses,
-  Logo
+  Logo,
+  Back
 } from './styles.ts';
 import { useAddress } from '../../contexts/AddressContext.tsx';
 import { addressInitial, addressesSchema, emptyAddresses, newAddressInitial, telephoneInitial, telephoneProps, telephoneSchema } from './structures.ts';
 import { putUpdateClient } from '../../services/Clients/putUpdateClient.ts';
-import { Link } from 'react-router-dom';
-import { frontEndRoutes } from '../../routes/index.ts';
 import Header from '../../components/Header/index.tsx';
+import arrowLeft from '../../assets/arrow-left.svg';
 
 
 interface updateProps {
@@ -210,6 +210,9 @@ const [cityAndState, setCityAndState] = useState<AddressProps[]>([
     <Container>
       <Header action={true}/>
         <Section>
+        <Back to="/home" title="Voltar">
+            <img src={arrowLeft} alt="Seta para a esquerda" /> Voltar
+          </Back>
           <Logo src="Logo Login.svg" alt="" />
           <PageTitle>Perfil</PageTitle>
           <MainInfo>

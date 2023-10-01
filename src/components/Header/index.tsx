@@ -6,8 +6,9 @@ import imgLogo from '../../assets/imgLogo.svg';
 import { useEffect, useRef, useState } from 'react';
 import { InputFind } from '../InputFind';
 import { DropdownItem } from '../DropdownIcon/DropdownItem';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { frontEndRoutes } from '../../routes';
+import { useCart } from '../../contexts/CartContext';
 
 type HeaderProps = {
   action: boolean;
@@ -16,13 +17,41 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const {userData} = useCart()
+  const [headerName, setHeaderName] = useState('')
+ 
+  useEffect(()=> {
+  if(userData.name){
+  const nameAux = userData.name.split(' ')
+  setHeaderName(nameAux[0])
+}
+},[userData.name])
+
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.href = frontEndRoutes.login;
+  }
+
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href^="#"]');
+    for (const link of links) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.substring(1);
+        const targetElement = document.getElementById(targetId??'');
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  });
 
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setOpen(false);
-        console.log(menuRef.current);
       }
     };
 
@@ -39,12 +68,13 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
         <Link to={frontEndRoutes.home}><img src={logo} alt="name logo"/></Link>
         <ul>
           <li>
-            {/* Implementar o Link do Router */}
-            <a href="#">Chefs próximos</a>
+            <a href="#nearby">Próximo a você</a>
           </li>
           <li>
-            {/* Implementar o Link do Router */}
-            <a href="#">Favoritos</a>
+            <a href="#favorites">Favoritos</a>
+          </li>
+          <li>
+            <a href="#map" >Chefs próximos</a>
           </li>
         </ul>
       </Logo>
@@ -63,16 +93,16 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
             }}
           >
             <img src={user} />
-            <span>Olá, {'data.user'}!</span>
+            <span>Olá, {headerName}!</span>
           </div>
 
           <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-            <h3>Olá, {'data.user'}</h3>
+            <h3>Olá, {headerName}</h3>
             <ul>
               <DropdownItem img={user} text={'Pedidos'} link='' />
               <DropdownItem img={user} text={'Pagamentos'} link='' />
-              <DropdownItem img={user} text={'Meus dados'} link='/profile' />
-              <DropdownItem img={user} text={'Sair'} link='' />
+              <DropdownItem img={user} text={'Meus dados'} link={frontEndRoutes.userProfile} />
+              <DropdownItem img={user} text={'Sair'} link='' onClick= {handleLogout}/>
             </ul>
           </div>
         </div>

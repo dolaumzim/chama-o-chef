@@ -27,7 +27,7 @@ export const DishDetails = () => {
   const [counter, setCounter] = useState(0);
   const counterValue = useMemo(() => counter, [counter]);
   const [liked, setLiked] = useState<boolean | undefined>();
-  const [chefDishes, setChefDishes] = useState<Props.DishData[]>([]);
+  const [chefDishes, setChefDishes] = useState([]);
 
   // const [carouselItems, setCarouselItems] = useState([]);
 

@@ -11,7 +11,7 @@ export const Container = styled.section`
 
 export const ImageBanner = styled.div`
   width: 100%;
-  height: 7.5vh;
+  height: 70px;
   border: none;
   margin: 0px;
   padding: 0px;
