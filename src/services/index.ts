@@ -37,7 +37,7 @@ export const backendRoutesApi = {
       `/clients/orders/${order_id}/checkout`,
     payOrder: (order_id: string = ':order_id') =>
       `/clients/orders/${order_id}/pay`,
-    evaluateInOrder: (order_id: string = ':order_id') =>
+    evaluateOrder: (order_id: string = ':order_id') =>
       `/clients/orders/${order_id}/evaluate`,
 
     //Addresses

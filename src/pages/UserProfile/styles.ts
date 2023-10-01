@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Form } from 'formik'
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     display: flex; 
@@ -11,13 +12,13 @@ export const Container = styled.div`
 
 export const Logo = styled.img`
     position: absolute;
-    top: 13vh;
+    top: 150px;
     right:13vw;
 
 `
 
 export const Section = styled.section`
-    margin: 10vh;
+    margin: 100px;
     padding: 10vh;
     display: flex; 
     background-color:#fff;
@@ -220,13 +221,6 @@ export const SpanRight = styled.span`
     text-align: right;
 `
 
-export const SignUpSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-
 export const NewButton = styled.button`
     color: #FFF;
     font-size: 20px;
@@ -313,3 +307,22 @@ export const Line = styled.div`
     margin: 3vh 0;
 `
 
+export const Back = styled(Link)`
+    align-self: flex-start;
+    display: flex;
+    width: 90px;
+    color: #f58100;
+    align-items: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    img {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+  }
+`

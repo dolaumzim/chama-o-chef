@@ -9,36 +9,41 @@ import { frontEndRoutes } from '.';
 import { DishDetails } from '../pages/DishDetails';
 // import { Locationteste } from '../pages/locationteste';
 import { UserProfile } from '../pages/UserProfile';
+import { CartProvider } from '../contexts/CartContext';
 
 const ChamaOChefeRoutes = () => {
+  const authenticated = localStorage.getItem('token');
 
-// if(logged) 
-  return (
-    <Routes>
-      <Route element={<PublicSectionLayout />}>
-        <Route path={frontEndRoutes.login} element={<Login />} />
-        <Route path={frontEndRoutes.signup} element={<SignUp />} />
-        <Route
-          path={frontEndRoutes.forgotPassword}
-          element={<ForgotPassword />}
-        />
-        <Route
-          path={frontEndRoutes.recoverPassword}
-          element={<RecoverPassword />}
-        />
-        {/* <Route path="/location" element={<Locationteste/>} /> */}
-      </Route>
-      <Route path="/*" element={<Navigate replace to={'/login'} />} />
-      {/* </Routes>
-        )
-        return (
-        <Routes> */}
-      <Route path={frontEndRoutes.home} element={<Home />} />
-      <Route path={frontEndRoutes.userProfile} element={<UserProfile/>} />
-      <Route path={frontEndRoutes.dish(':id')} element={<DishDetails />} />
-      <Route path="/*" element={<Navigate replace to={'/login'} />} />
-    </Routes>
-  );
+  if (!authenticated)
+    return (
+      <Routes>
+        <Route element={<PublicSectionLayout />}>
+          <Route path={frontEndRoutes.login} element={<Login />} />
+          <Route path={frontEndRoutes.signup} element={<SignUp />} />
+          <Route
+            path={frontEndRoutes.forgotPassword}
+            element={<ForgotPassword />}
+          />
+          <Route
+            path={frontEndRoutes.recoverPassword}
+            element={<RecoverPassword />}
+          />
+        </Route>
+        <Route path="/*" element={<Navigate replace to={frontEndRoutes.login} />} />
+      </Routes>
+    );
+    else
+    return (
+  <CartProvider>
+        <Routes>
+          {/* <Route path="/location" element={<Locationteste />} /> */}
+          <Route path={frontEndRoutes.home} element={<Home />} />
+          <Route path={frontEndRoutes.userProfile} element={<UserProfile />} />
+          <Route path={frontEndRoutes.dish(':id')} element={<DishDetails />} />
+          <Route path="/*" element={<Navigate replace to={frontEndRoutes.home} />} />
+        </Routes>
+      </CartProvider>
+    );
 };
 
 export default ChamaOChefeRoutes;

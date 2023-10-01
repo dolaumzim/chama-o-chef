@@ -257,3 +257,48 @@ export interface Chef {
 export interface ChefResponse {
   data: Chef;
 }
+
+export interface OrderProps {
+  delivery_address_id: string;
+  items_attributes: {
+    dish_id: string;
+    amount: number | null;
+  }[];
+}
+
+export interface OrderResponse {
+  id: string;
+  client_id: string;
+  delivery_address_id: string;
+  total_price: number;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  delivery_address: Address;
+  items: {
+    id: string;
+    order_id: string;
+    dish_id: string;
+    amount: number | null;
+    unit_price: number | null;
+    created_at: Date;
+    updated_at: Date;
+  }[];
+}
+
+export interface CheckoutProps {
+  client_id: string;
+  id: string;
+  delivery_address_id: string;
+  total_price: number | null;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+  payment_link: string;
+}
+
+export interface RatingsProps {
+  dish_id: string;
+  rate: number | null;
+  comment: string;
+}

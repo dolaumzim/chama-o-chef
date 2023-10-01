@@ -53,11 +53,11 @@ const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
 );
 
 const Carousel = ({ items }: CarouselProps) => {
-  const initialSlidesToShow = items?.length < 3 ? items?.length : 3;
-  const initialSlidesToScroll = items?.length < 3 ? items?.length : 3;
+  const initialSlidesToShow = items?.length < 5 ? items?.length : 5;
+  const initialSlidesToScroll = items?.length < 5 ? items?.length : 5;
 
   const settings: Settings = {
-   
+    variableWidth: true,
     dots: false,
     infinite: true,
     speed: 500,
@@ -73,6 +73,7 @@ const Carousel = ({ items }: CarouselProps) => {
         <Slider {...settings}>
           {items.map((item, index) => (
             <Dish
+              id={item.id}
               key={index}
               image={item.image}
               name={item.name}

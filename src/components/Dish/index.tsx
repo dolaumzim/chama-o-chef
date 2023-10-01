@@ -28,6 +28,7 @@ import { Link } from 'react-router-dom';
 import { frontEndRoutes } from '../../routes';
 
 interface PropsDish {
+  id: string;
   image: string;
   name: string;
   price: string;

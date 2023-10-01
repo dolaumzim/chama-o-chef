@@ -66,4 +66,11 @@ export const Outer = styled.div`
 
 export const Inner = styled.div`
   width: 80%;
+
+
+  >div>div>div{
+    display:flex;
+    justify-content:center;
+    gap: 20px;
+  }
 `;

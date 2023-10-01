@@ -4,16 +4,23 @@ import 'slick-carousel/slick/slick-theme.css';
 import { DishData } from '../../services/structure';
 import Carousel, { CarouselProps } from '../Carousel';
 import { getDishes } from '../../services/Dishes/getDishes';
-
-const getUserLocation = () => {
-  return {
-    latitude: -25.457317961714313,
-    longitude: -49.294663627927406
-  };
-};
+import { useCart } from '../../contexts/CartContext';
 
 const NearbyDishes = () => {
   const [dishes, setDishes] = useState<DishData[]>([]);
+  const {userData,loading} = useCart()
+  
+  const getUserLocation = () => {
+    if(loading){
+    return{
+  latitude: 0,
+  longitude: 0}}
+  else{
+    return {
+      latitude: userData.addresses[0].latitude,
+      longitude: userData.addresses[0].longitude,
+    };
+  };}
 
   const getNearby = async (latitude : number, longitude : number) => {
     try {
@@ -27,7 +34,7 @@ const NearbyDishes = () => {
     const userLocation = getUserLocation();
 
     getNearby(userLocation.latitude, userLocation.longitude)
-  }, []);
+  }, [loading]);
 
   const carouselData: CarouselProps = {
     items: dishes.map(item => ({

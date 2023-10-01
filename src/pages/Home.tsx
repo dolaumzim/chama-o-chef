@@ -23,9 +23,14 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header action={activeColor} />
-      <NearbyDishes />
-      <FavoriteDishes />
+      <div style={{height:'300px', width:'100%', display:'flex', justifyContent: 'center', alignItems : 'center', overflow:'hidden', background: 'url("src/assets/banner.svg")', backgroundSize: 'cover', marginBottom:'2vh', backgroundPosition: '50%'}}>
+      </div>
+      <div id='nearby'/>
+      <NearbyDishes/>
       <SectionDishes />
+      <div id='favorites'/>
+      <FavoriteDishes />
+      <div id='map'/>
       <SectionMapHome />
       {/* <AllDishes /> */}
     </div>

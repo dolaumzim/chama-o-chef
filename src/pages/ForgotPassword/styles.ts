@@ -24,13 +24,10 @@ export const PageSubtitle = styled.h2`
   text-align: center;
 `
 
-
 export const SubmitButton = styled.button`
 color: #FFF;
 font-size: 20px;
-font-style: normal;
 font-weight: 600;
-line-height: normal;
 font-variant: all-small-caps;
 border-radius: 50px;
 background: #F58100; 
@@ -51,7 +48,6 @@ transition: ease-out 300ms;
     }
     `
 
-
 export const NewUser = styled.span`
 color: #323232;
 `
@@ -60,9 +56,7 @@ color: #323232;
 export const NewUserLink = styled(Link)`
 color: #F58100;
 font-size: 20px;
-font-style: normal;
 font-weight: 600;
-line-height: normal;
 `
 
 
@@ -74,7 +68,6 @@ text-decoration-line: underline;
 width: 60%;
 text-align: center;
 `
-
 
 export const ErrorSpan = styled.span`
 color: red;

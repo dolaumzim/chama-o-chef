@@ -5,6 +5,7 @@ import { Button } from '../Button';
 export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
+  justify-content:center;
 
   width: 100%;
   border: none;
@@ -31,7 +32,8 @@ export const StyledTitle = styled.div`
 
 export const StyledListDish = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+
   flex-wrap: wrap;
   width: 100%;
   margin-top: 30px;
