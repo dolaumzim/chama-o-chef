@@ -65,6 +65,13 @@ export const AllDishes: React.FC = () => {
     window.addEventListener('scroll', positionScroll);
   }, []);
 
+  const averageRate = (ratings: Props.Rating[]) => {
+    const totalAux = ratings.reduce(
+     (sum, rating) => sum + rating.rate, 0);
+   return Number((totalAux / ratings.length).toFixed(1) )
+  }
+
+
   return (
     <>
       <Header action={activeColor} />
@@ -105,9 +112,7 @@ export const AllDishes: React.FC = () => {
                 price={item.unit_price}
                 restaurantName={item.chef.name}
                 rating={
-                  item.ratings.length > 0
-                    ? item.ratings[0].rate.toString()
-                    : '0'
+                  item.ratings.length > 0 ? averageRate(item.ratings) : 0
                 }
                 isFavorite={item.liked_by_me}
               />

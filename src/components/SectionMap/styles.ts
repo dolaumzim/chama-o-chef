@@ -6,7 +6,7 @@ export const ContainerMap = styled.div`
   width: 100%;
   border: none;
   background-color: #fff;
-  padding: 8px 160px;
+  padding: 8px 100px;
   margin-top: 30px;
 `;
 
