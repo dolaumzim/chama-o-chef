@@ -5,6 +5,7 @@ import FavoriteDishes from '../components/FavoriteDishes';
 import Header from '../components/Header';
 import { SectionDishes } from '../components/SectionDishes';
 import { SectionMapHome } from '../components/SectionMap';
+import Background from '../components/Background';
 
 const Home: React.FC = () => {
   const [activeColor, setActiveColor] = useState(false);
@@ -23,8 +24,9 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header action={activeColor} />
-      <div style={{height:'300px', width:'100%', display:'flex', justifyContent: 'center', alignItems : 'center', overflow:'hidden', background: 'url("src/assets/banner.svg")', backgroundSize: 'cover', marginBottom:'2vh', backgroundPosition: '50%'}}>
-      </div>
+      <Background/>
+      {/*<div style={{height:'300px', width:'100%', display:'flex', justifyContent: 'center', alignItems : 'center', overflow:'hidden', background: 'url("src/assets/banner.svg")', backgroundSize: 'cover', marginBottom:'2vh', backgroundPosition: '50%'}}>
+      </div>*/}
       <div id='nearby'/>
       <NearbyDishes/>
       <SectionDishes />
