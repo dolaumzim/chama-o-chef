@@ -37,7 +37,7 @@ interface PropsDish {
   name: string;
   price: string;
   restaurantName: string;
-  rating: string;
+  rating: number;
   isFavorite: boolean;
 }
 
@@ -53,10 +53,7 @@ export const Dish = (data: PropsDish) => {
       ? data.name.substring(0, maxLength - 3) + '...'
       : data.name;
 
-  return (
-    <>
-      {location.pathname.includes('home') ||
-      location.pathname.includes('alldishes') ? (
+  return (      
         <Link to={frontEndRoutes.dish(data.id)}>
           <DishContainer>
             <ImgDish>
@@ -83,37 +80,5 @@ export const Dish = (data: PropsDish) => {
             </DishInfo>
           </DishContainer>
         </Link>
-      ) : (
-        <Link to={frontEndRoutes.dish(data.id)} reloadDocument>
-          <DishContainer>
-            <ImgDish>
-              <img src={data.image} alt={data.name} />
-            </ImgDish>
-            {data.isFavorite ? (
-              <FavoriteButton>
-                <img src={heartRedIcon} alt="" />
-              </FavoriteButton>
-            ) : (
-              <FavoriteButton>
-                <img src={heartBlueIcon} alt="" />
-              </FavoriteButton>
-            )}
-            <DishInfo>
-              <StyledTitle>{data.name}</StyledTitle>
-              <StyledParagraph>{data.restaurantName}</StyledParagraph>
-              <StyledSecondParagraph>
-                {Number(data.price).toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                })}
-                <span>
-                  <img src={star} /> {data.rating}
-                </span>
-              </StyledSecondParagraph>
-            </DishInfo>
-          </DishContainer>
-        </Link>
-      )}
-    </>
   );
 };

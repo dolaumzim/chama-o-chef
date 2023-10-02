@@ -310,7 +310,7 @@ export interface CarouselItemsProps {
     name: string;
     price: string;
     restaurantName: string;
-    rating: string;
+    rating: number;
     isFavorite: boolean;
 }
 

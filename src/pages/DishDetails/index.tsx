@@ -61,13 +61,20 @@ export const DishDetails = () => {
       const getDishesChef = await getChefDishes(chef.id);
       setCordChef(cords);
 
+      const averageRate = (dish: Props.DishData) => {
+        const totalAux = dish.ratings.reduce(
+         (sum, rating) => sum + rating.rate, 0);
+       return Number((totalAux / dish.ratings.length).toFixed(1) )
+      }
+
       const carouselItems = getDishesChef.data.map((dish: Props.DishData) => ({
         id: dish.id,
         image: dish.images[0],
         name: dish.name,
         price: dish.unit_price,
         restaurantName: dish.chef.name,
-        rating: dish.ratings.length > 0 ? dish.ratings[0].rate.toString() : '0',
+        rating: dish.ratings.length > 0 ? averageRate(dish).toString()
+        : '0',
         isFavorite: dish.liked_by_me
       }));
       setChefDishes(carouselItems);
@@ -120,7 +127,7 @@ export const DishDetails = () => {
       (sum, rating) => sum + rating.rate,
       0
     );
-    average = total / dishData.ratings.length;
+    average = Number((total / dishData.ratings.length).toFixed(1));
   } else {
     average = 0;
   }
@@ -242,7 +249,11 @@ export const DishDetails = () => {
               <Map page={'details'} restaurant={cordChef} user={cordClient} />
               <h1>Peça também</h1>
 
-              <Carousel items={chefDishes} />
+              <Styled.Outer>
+                <Styled.Inner>
+                  <Carousel items={chefDishes} />
+                </Styled.Inner>
+              </Styled.Outer>
 
               <h1>Avaliações</h1>
               {dishData.ratings.length > 0 ? (

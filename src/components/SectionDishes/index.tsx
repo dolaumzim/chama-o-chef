@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { Dish } from '../Dish';
 import {
@@ -47,9 +47,11 @@ export const SectionDishes: React.FC = () => {
     console.log(hasNextPage)
   };
 
-  useEffect(()=>{
-    console.log(hasNextPage)
-  },[])
+  const averageRate = (ratings: Props.Rating[]) => {
+    const totalAux = ratings.reduce(
+     (sum, rating) => sum + rating.rate, 0);
+   return Number((totalAux / ratings.length).toFixed(1) )
+  }
 
   return (
     <StyledSection>
@@ -76,7 +78,7 @@ export const SectionDishes: React.FC = () => {
             price={item.unit_price}
             restaurantName={item.chef.name}
             rating={
-              item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0'
+              item.ratings.length > 0 ? averageRate(item.ratings) : 0
             }
             isFavorite={item.liked_by_me}
           />
