@@ -7,8 +7,8 @@ import {
   CarouselButtonIcon,
   CarouselButtonLeftArrow,
   CarouselButtonRightArrow,
-  Inner,
-  Outer
+  // Inner,
+  // Outer
 } from './styled';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { CarouselProps } from '../../services/structure';
@@ -39,9 +39,9 @@ const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
   </CarouselButtonContainer>
 );
 
-const Carousel = ({ items }: CarouselProps) => {
-  const initialSlidesToShow = items?.length < 5 ? items?.length : 5;
-  const initialSlidesToScroll = items?.length < 5 ? items?.length : 5;
+const Carousel = ({ items }: CarouselProps) => { 
+  const initialSlidesToShow = items?.length < 6 ? items?.length : 6;
+  const initialSlidesToScroll = items?.length < 2 ? items?.length : 4;
 
   const settings: Settings = {
     variableWidth: true,
@@ -55,8 +55,7 @@ const Carousel = ({ items }: CarouselProps) => {
   };
 
   return (
-    <Outer>
-      <Inner>
+  
         <Slider {...settings}>
           {items.map((item, index) => (
             <Dish
@@ -71,8 +70,7 @@ const Carousel = ({ items }: CarouselProps) => {
             />
           ))}
         </Slider>
-      </Inner>
-    </Outer>
+    
   );
 };
 

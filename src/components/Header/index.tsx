@@ -67,7 +67,8 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
         <Link to={frontEndRoutes.home}>
           <img src={logo} alt="name logo" />
         </Link>
-        <ul>
+        {location.pathname.includes('home')?
+          <ul>
           <li>
             <a href="#nearby">Próximo a você</a>
           </li>
@@ -78,6 +79,7 @@ const Header: React.FC<HeaderProps> = ({ action }: HeaderProps) => {
             <a href="#map">Chefs próximos</a>
           </li>
         </ul>
+        :null}
       </Logo>
 
       <ImgLogo>
