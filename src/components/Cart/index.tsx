@@ -49,11 +49,7 @@ export const Cart = () => {
       setOrderId(response.data.id);
       const reponsePay = await patchCheckoutOrder(response.data.id);
       if (reponsePay.status == 200) {
-        //checkout URL
-        setUrl(
-          'https://static.imgs.app/c/acc/fbf671bff573e7e52045d6f974f88835/i/kNxjwfPym4/pegadinha-do-malandro.jpg'
-        );
-        console.log(url);
+        setUrl(reponsePay.data.payment_link);
       }
     }
   };
