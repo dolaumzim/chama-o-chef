@@ -96,11 +96,11 @@ const Login = () => {
 
                   {loginError && <ErrorSpan>{loginError}</ErrorSpan>}
                   {loginSuccess && (
-                    <SuccessMessage>Login bem-sucedido!</SuccessMessage>
+                    <SuccessMessage>Login bem sucedido!</SuccessMessage>
                   )}
 
                 <PasswordForgot to={frontEndRoutes.forgotPassword}>Esqueceu a senha?</PasswordForgot>
-                <SubmitButton disabled={isSubmitting || !isValid} loading={isLoading}>
+                <SubmitButton data-testid='submitButton' disabled={isSubmitting || !isValid} loading={isLoading}>
                   {isLoading ? '' : 'Entrar'}
                 </SubmitButton>
 

@@ -9,7 +9,7 @@ export const CarouselButtonContainer = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1;
+  z-index: 0;
   transition: background-color 0.3s;
 `;
 
@@ -44,7 +44,7 @@ export const CarouselButtonRightArrow = styled.div`
   font-weight: 700;
   transition: background-color 0.3s;
   position: absolute;
-  right: -70vw;
+  right: -76vw;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
@@ -59,18 +59,22 @@ export const CarouselButtonIcon = styled.i`
   align-items: center;
 `;
 
-export const Outer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+// export const Outer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   overflow:visible;
+// `;
 
-export const Inner = styled.div`
-  width: 80%;
+// export const Inner = styled.div`
+//   width: 100%;
+//   overflow: visible;
+//   z-index: 0;
 
 
-  >div>div>div{
-    display:flex;
-    justify-content:center;
-    gap: 20px;
-  }
-`;
+//   >div>div>div{
+//     display:flex;
+//     justify-content:center;
+//     gap: 20px;
+//     padding: 15px
+//   }
+// `;

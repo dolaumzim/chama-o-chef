@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import { SectionDishes } from '../components/SectionDishes';
 import { SectionMapHome } from '../components/SectionMap';
 import Background from '../components/Background';
+import { Cart } from '../components/Cart';
 
 const Home: React.FC = () => {
   const [activeColor, setActiveColor] = useState(false);
@@ -32,6 +33,7 @@ const Home: React.FC = () => {
       <FavoriteDishes />
       <div id='map'/>
       <SectionMapHome />
+      <Cart />
       {/* <AllDishes /> */}
     </div>
   );

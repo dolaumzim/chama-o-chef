@@ -13,6 +13,7 @@ import { getDishes } from '../../services/Dishes/getDishes';
 import { InputFind } from '../InputFind';
 import { useDebouncedValue } from '../../hooks/debounce';
 import * as Props from '../../services/structure';
+import { frontEndRoutes } from '../../routes';
 
 export const SectionDishes: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -43,7 +44,14 @@ export const SectionDishes: React.FC = () => {
 
   const handleFetchNextPage = () => {
     fetchNextPage();
+    console.log(hasNextPage)
   };
+
+  const averageRate = (ratings: Props.Rating[]) => {
+    const totalAux = ratings.reduce(
+     (sum, rating) => sum + rating.rate, 0);
+   return Number((totalAux / ratings.length).toFixed(1) )
+  }
 
   return (
     <StyledSection>
@@ -52,12 +60,13 @@ export const SectionDishes: React.FC = () => {
         <TitleContainer>
           <h1>Pratos</h1>
           <InputFind
+            id='searchBar'
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Busca por prato"
           />
         </TitleContainer>
-        <StyledAllDishes to={'/pratos'}>Ver todos</StyledAllDishes>
+        <StyledAllDishes to={frontEndRoutes.dishes}>Ver todos</StyledAllDishes>
       </StyledTitle>
       <StyledListDish>
         {items?.map((item: Props.DishData, index: number) => (
@@ -69,7 +78,7 @@ export const SectionDishes: React.FC = () => {
             price={item.unit_price}
             restaurantName={item.chef.name}
             rating={
-              item.ratings.length > 0 ? item.ratings[0].rate.toString() : '0'
+              item.ratings.length > 0 ? averageRate(item.ratings) : 0
             }
             isFavorite={item.liked_by_me}
           />

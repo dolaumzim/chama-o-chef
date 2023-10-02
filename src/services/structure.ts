@@ -172,6 +172,7 @@ export interface DishData {
   liked_by_me: boolean;
   disliked_by_me: boolean;
   likes: Like[];
+  quantity?: number;
 }
 
 export interface DishesApiResponse {
@@ -309,7 +310,7 @@ export interface CarouselItemsProps {
     name: string;
     price: string;
     restaurantName: string;
-    rating: string;
+    rating: number;
     isFavorite: boolean;
 }
 
