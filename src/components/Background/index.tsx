@@ -1,30 +1,34 @@
-import { useState, useEffect } from 'react';
-import { BackgroundContainer, ImageWrapper } from './styles.ts';
-import background from '../../assets/backgound1.svg'
+import { BackgroundContainer, RowImages } from './styles.ts';
+import background1 from '../../assets/backgound1.svg';
+import background2 from '../../assets/background2.svg';
+import background3 from '../../assets/background3.svg';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const BackgroundImage = () => {
-  const images = [background, 'https://source.unsplash.com/featured/food,1', 'https://source.unsplash.com/featured/food,2'];
-  const [currentImage, setCurrentImage] = useState(0);
+  const images = [background1, background2, background3];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [images.length])
+  const sliderSettings = {
+    autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 500,
+    infinite: true,
+    dots: true,
+    arrows: false,
+  };
 
   return (
     <BackgroundContainer>
-     <ImageWrapper>
+      <Slider {...sliderSettings}>
         {images.map((img, index) => (
-          <img 
-            key={img}
-            src={img} 
-            alt="Background" 
-            className={currentImage === index ? 'image-slide' : ''} 
-          />
+          <div key={index}>
+            <RowImages>
+              <img src={img}  />
+            </RowImages>
+          </div>
         ))}
-      </ImageWrapper>
+      </Slider>
     </BackgroundContainer>
   );
 };

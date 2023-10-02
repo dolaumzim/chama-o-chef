@@ -25,8 +25,6 @@ const Home: React.FC = () => {
     <div>
       <Header action={activeColor} />
       <Background/>
-      {/*<div style={{height:'300px', width:'100%', display:'flex', justifyContent: 'center', alignItems : 'center', overflow:'hidden', background: 'url("src/assets/banner.svg")', backgroundSize: 'cover', marginBottom:'2vh', backgroundPosition: '50%'}}>
-      </div>*/}
       <div id='nearby'/>
       <NearbyDishes/>
       <SectionDishes />
