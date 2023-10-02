@@ -195,9 +195,9 @@ export const DishDetails = () => {
                     {average}
                   </Styled.Rate>
                   {liked ? (
-                    <Styled.Like onClick={handleLike} cursor={'pointer'} />
+                    <Styled.Like data-testid="like" onClick={handleLike} cursor={'pointer'} />
                   ) : (
-                    <Styled.Unlike onClick={handleLike} cursor={'pointer'} />
+                    <Styled.Unlike data-testid="like" onClick={handleLike} cursor={'pointer'} />
                   )}
                   {disliked ? (
                     <Styled.Dislike

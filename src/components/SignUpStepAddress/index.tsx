@@ -201,7 +201,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
               &lt;
             </StepButton>
           </StepBack>
-          <SubmitButton onClick={()=> console.log(values)}>
+          <SubmitButton data-testid='submitButton' onClick={()=> console.log(values)}>
             Criar Conta
           </SubmitButton>
           <CancelAddress
@@ -212,7 +212,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
               setAddresses(emptyAddresses)
             }}
           >
-            Mudei de idiea, não quero cadastrar endereço agora...
+            Mudei de ideia, não quero cadastrar endereço agora...
           </CancelAddress>
           {signUpError ? (
             <span> Não foi possível realizar seu cadastro </span>

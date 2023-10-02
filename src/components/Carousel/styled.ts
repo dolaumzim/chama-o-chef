@@ -44,7 +44,7 @@ export const CarouselButtonRightArrow = styled.div`
   font-weight: 700;
   transition: background-color 0.3s;
   position: absolute;
-  right: -70vw;
+  right: -80vw;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.7);
