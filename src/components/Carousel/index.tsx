@@ -41,17 +41,56 @@ const CustomCarouselButtons: React.FC<CustomArrowProps> = ({
 
 const Carousel = ({ items }: CarouselProps) => { 
   const initialSlidesToShow = items?.length < 6 ? items?.length : 6;
-  const initialSlidesToScroll = items?.length < 2 ? items?.length : 4;
+  const initialSlidesToScroll = items?.length < 2 ? items?.length : 3;
 
   const settings: Settings = {
     variableWidth: true,
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: initialSlidesToShow,
     slidesToScroll: initialSlidesToScroll,
     nextArrow: <CustomCarouselButtons direction="next" />,
-    prevArrow: <CustomCarouselButtons direction="prev" />
+    prevArrow: <CustomCarouselButtons direction="prev" />,
+    responsive: [
+      {
+        breakpoint: 1750,
+        settings: {
+          slidesToShow: items?.length < 5 ? items?.length : 5,
+          speed: 650,
+        }
+      },
+      {
+        breakpoint: 1440,
+        settings: {
+          slidesToShow: items?.length < 4 ? items?.length : 4,
+          speed: 650,
+        }
+      },
+      {
+        breakpoint: 1150,
+        settings: {
+          slidesToShow: items?.length < 3 ? items?.length : 3,
+          speed: 600,
+        }
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          speed: 550,
+        }
+      },
+      {
+        breakpoint: 570,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          speed: 500,
+        }
+      },
+    ]
   };
 
   return (

@@ -10,6 +10,10 @@ export const StyledSection = styled.section`
   border: none;
   background-color: #fff;
   padding: 8px 160px;
+
+  @media screen and (max-width: 980px) {
+    padding:8px 50px;
+  }
 `;
 
 export const TitleContainer = styled.div`

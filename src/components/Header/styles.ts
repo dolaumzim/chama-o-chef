@@ -19,7 +19,7 @@ export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 3vw;
 
   img {
     height: 60px;
@@ -45,6 +45,21 @@ export const Logo = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  }
+
+  @media screen and (max-width: 1200px) {
+    ul {
+    flex-direction:column;
+    gap: 0px;
+  }
+    a {
+      font-size:12px;
+    }
+}
+  @media screen and (max-width: 750px) {
+    ul {
+    display:none;
+  }
   }
 `;
 
@@ -170,4 +185,8 @@ export const HeaderName = styled.span`
   cursor: pointer;
   align-items: center;
   font-weight: 600;
+
+  @media screen and (max-width: 700px) {
+    display:none;
+  }
 `;

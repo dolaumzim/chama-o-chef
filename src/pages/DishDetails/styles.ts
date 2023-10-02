@@ -203,7 +203,7 @@ export const Outer = styled.div`
 `;
 
 export const Inner = styled.div`
-  width: 75%;
+  width: 100%;
   overflow: visible;
   z-index: 0;
 

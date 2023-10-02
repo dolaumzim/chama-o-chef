@@ -36,15 +36,18 @@ export const DishDetails = () => {
   const { cartItems, setCartItems } = useCart();
 
   const fetchDishData = useCallback(async () => {
-    if (!id || dishData) {
+    if (!id ) {
       return;
     }
     const dish = await getDish(id);
-    const dataDish = { ...dish.data };
-    setDishData(dataDish);
-  }, [id, dishData]);
+    setDishData(dish.data);
+  }, [id]);
 
-  const fetchChefData = useCallback(async () => {
+useEffect(()=> {
+fetchChefData()
+},[dishData])
+
+  const fetchChefData = async () => {
     if (!dishData?.chef_id || cordChef.length > 0) {
       return;
     }
@@ -79,7 +82,7 @@ export const DishDetails = () => {
       }));
       setChefDishes(carouselItems);
     }
-  }, [dishData, cordChef]);
+  };
 
   const fetchClientData = useCallback(async () => {
     if (cordClient) {
@@ -95,12 +98,21 @@ export const DishDetails = () => {
   }, [cordClient]);
 
   useEffect(() => {
-    fetchDishData();
-    fetchChefData();
-    fetchClientData();
+    const fetchData = async() =>{
+try {
+  await fetchDishData();
+  await fetchClientData();  
+} catch (error) {
+  console.log(error)
+}
+    }
+    fetchData()
+  }, [id]);
+
+  useEffect(()=>{
     handleGetLike();
     handleGetDislike();
-  }, [fetchDishData, fetchChefData, fetchClientData]);
+  },[dishData])
 
   useEffect(() => {
     const positionScroll = () => {
@@ -157,10 +169,8 @@ export const DishDetails = () => {
         };
         const otherItems = cartItems.filter(item => item.id !== dishData.id);
         setCartItems([...otherItems, existingItem]);
-        console.log(cartItems.map(item => item.quantity));
       } else {
         setCartItems([...cartItems, { ...dishData, quantity: counter }]);
-        console.log(cartItems.map(item => item.quantity));
       }
     }
   };
