@@ -43,11 +43,14 @@ apiChef.interceptors.response.use(
   },
   error=>{
     if (error.response.status===401){
+      const expToken = localStorage.getItem('exp_date')
+      if (!expToken) return Promise.reject(error)
+      else{
       console.log('Autenticação expirada, faça login novamente')
       localStorage.clear()
       alert('Autenticação expirada, faça login novamente')
       window.location.href = '/login';
-    }
+    }}
     return Promise.reject(error)
   }
 

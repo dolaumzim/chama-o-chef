@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { Dish } from '../Dish';
 import {
@@ -13,6 +13,7 @@ import { getDishes } from '../../services/Dishes/getDishes';
 import { InputFind } from '../InputFind';
 import { useDebouncedValue } from '../../hooks/debounce';
 import * as Props from '../../services/structure';
+import { frontEndRoutes } from '../../routes';
 
 export const SectionDishes: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -43,7 +44,12 @@ export const SectionDishes: React.FC = () => {
 
   const handleFetchNextPage = () => {
     fetchNextPage();
+    console.log(hasNextPage)
   };
+
+  useEffect(()=>{
+    console.log(hasNextPage)
+  },[])
 
   return (
     <StyledSection>
@@ -52,12 +58,13 @@ export const SectionDishes: React.FC = () => {
         <TitleContainer>
           <h1>Pratos</h1>
           <InputFind
+            id='searchBar'
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Busca por prato"
           />
         </TitleContainer>
-        <StyledAllDishes to={'/pratos'}>Ver todos</StyledAllDishes>
+        <StyledAllDishes to={frontEndRoutes.dishes}>Ver todos</StyledAllDishes>
       </StyledTitle>
       <StyledListDish>
         {items?.map((item: Props.DishData, index: number) => (
