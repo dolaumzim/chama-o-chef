@@ -31,9 +31,12 @@ export const ImgDish = styled.div`
 `;
 
 export const DishInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   width: 180px;
-  height: 105px;
+  height: 110px;
   bottom: 10px;
   left: 10px;
   right: 10px;
@@ -51,19 +54,23 @@ export const StyledTitle = styled.h2`
 `;
 
 export const StyledParagraph = styled.p`
-  color: #000;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
+  /* color: #000;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-bottom: 5px;
+  margin-bottom: 5px; */
 `;
 
 export const StyledSecondParagraph = styled.p`
   display: flex;
   justify-content: space-between;
   color: #f58100;
-  font-size: 20px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

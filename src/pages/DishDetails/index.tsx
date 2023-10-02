@@ -12,6 +12,9 @@ import { Ratings } from '../../components/Ratings';
 import { putLikeDish } from '../../services/Dishes/putLikeDish';
 import { getChefDishes } from '../../services/Chefs/getChefDishes';
 import Carousel from '../../components/Carousel';
+import { useCart } from '../../contexts/CartContext';
+import { Cart } from '../../components/Cart';
+import { formatCurrency } from '../../utils/formatCurrency';
 import { putDislikeDish } from '../../services/Dishes/putDislikeDish';
 
 interface Location {
@@ -25,11 +28,12 @@ export const DishDetails = () => {
   const [cordChef, setCordChef] = useState<Location[]>([]);
   const [cordClient, setCordClient] = useState<Location>();
   const [activeColor, setActiveColor] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
   const counterValue = useMemo(() => counter, [counter]);
   const [liked, setLiked] = useState<boolean | undefined>();
   const [disliked, setDisliked] = useState<boolean | undefined>();
   const [chefDishes, setChefDishes] = useState<Props.CarouselItemsProps[]>([]);
+  const { cartItems, setCartItems } = useCart();
 
   const fetchDishData = useCallback(async () => {
     if (!id || dishData) {
@@ -64,11 +68,10 @@ export const DishDetails = () => {
         price: dish.unit_price,
         restaurantName: dish.chef.name,
         rating: dish.ratings.length > 0 ? dish.ratings[0].rate.toString() : '0',
-        isFavorite: dish.liked_by_me,
+        isFavorite: dish.liked_by_me
       }));
       setChefDishes(carouselItems);
     }
-    
   }, [dishData, cordChef]);
 
   const fetchClientData = useCallback(async () => {
@@ -108,7 +111,7 @@ export const DishDetails = () => {
   };
 
   const decrementCounter = () => {
-    if (counterValue > 0) setCounter(counterValue - 1);
+    if (counterValue > 1) setCounter(counterValue - 1);
   };
 
   let average = 0;
@@ -133,6 +136,25 @@ export const DishDetails = () => {
       await putLikeDish(dishData.id);
       const response = await getDish(dishData.id);
       setLiked(response.data.liked_by_me);
+    }
+  };
+
+  const handleAddCart = () => {
+    if (cartItems && dishData) {
+      let existingItem = cartItems.find(item => item.id === dishData.id);
+
+      if (existingItem) {
+        existingItem = {
+          ...existingItem,
+          quantity: (existingItem.quantity || 0) + counter
+        };
+        const otherItems = cartItems.filter(item => item.id !== dishData.id);
+        setCartItems([...otherItems, existingItem]);
+        console.log(cartItems.map(item => item.quantity));
+      } else {
+        setCartItems([...cartItems, { ...dishData, quantity: counter }]);
+        console.log(cartItems.map(item => item.quantity));
+      }
     }
   };
 
@@ -177,13 +199,24 @@ export const DishDetails = () => {
                   ) : (
                     <Styled.Unlike onClick={handleLike} cursor={'pointer'} />
                   )}
-                   {disliked ? (
-                    <Styled.Dislike onClick={handleDislike} cursor={'pointer'} />
+                  {disliked ? (
+                    <Styled.Dislike
+                      onClick={handleDislike}
+                      cursor={'pointer'}
+                    />
                   ) : (
-                    <Styled.Undislike onClick={handleDislike} cursor={'pointer'} />
+                    <Styled.Undislike
+                      onClick={handleDislike}
+                      cursor={'pointer'}
+                    />
                   )}
 
-                  <Styled.Price>{`R$ ${dishData.unit_price}`}</Styled.Price>
+                  <Styled.Price>
+                    {formatCurrency(
+                      Number(dishData.unit_price) * counter,
+                      'BRL'
+                    )}
+                  </Styled.Price>
                   <Styled.ToAdd>
                     <Styled.Counter>
                       <Styled.ButtonPlus
@@ -200,7 +233,9 @@ export const DishDetails = () => {
                         +
                       </Styled.ButtonPlus>
                     </Styled.Counter>
-                    <Styled.Button>Adicionar ao carrinho</Styled.Button>
+                    <Styled.Button onClick={handleAddCart}>
+                      Adicionar ao carrinho
+                    </Styled.Button>
                   </Styled.ToAdd>
                 </Styled.DishInfo>
               </Styled.DetailsDish>
@@ -235,6 +270,7 @@ export const DishDetails = () => {
           )}
         </Styled.ContainerDish>
       </Styled.Container>
+      <Cart />
     </>
   );
 };

@@ -172,6 +172,7 @@ export interface DishData {
   liked_by_me: boolean;
   disliked_by_me: boolean;
   likes: Like[];
+  quantity?: number;
 }
 
 export interface DishesApiResponse {

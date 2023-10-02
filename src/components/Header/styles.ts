@@ -64,14 +64,10 @@ export const ImgLogo = styled.div`
 export const Menu = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-right: 30px;
   border: 0px solid #ccc;
   gap: 30px;
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
 
   ul {
     list-style: none;
@@ -156,10 +152,7 @@ export const Menu = styled.div`
     color: #cecece;
     font-weight: 400;
   }
-  span {
-    color: gray;
-    cursor: pointer;
-  }
+
   .dropdown-menu ul li {
     padding: 10px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -169,4 +162,12 @@ export const Menu = styled.div`
     opacity: 1;
     cursor: pointer;
   }
+`;
+
+export const HeaderName = styled.span`
+  display: flex;
+  color: gray;
+  cursor: pointer;
+  align-items: center;
+  font-weight: 600;
 `;
