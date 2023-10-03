@@ -10,6 +10,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Header from '../../components/Header';
 import { Cart } from '../../components/Cart';
 import arrowLeft from '../../assets/arrow-left.svg';
+import { Footer } from '../../components/Footer';
 
 export const AllDishes: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -41,12 +42,7 @@ export const AllDishes: React.FC = () => {
 
   const handleFetchNextPage = () => {
     fetchNextPage();
-    console.log(hasNextPage);
   };
-
-  useEffect(() => {
-    console.log(hasNextPage);
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -124,6 +120,7 @@ export const AllDishes: React.FC = () => {
         </InfiniteScroll>
       </Styled.StyledSection>
       <Cart />
+      <Footer/>
     </>
   );
 };

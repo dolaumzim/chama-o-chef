@@ -70,7 +70,6 @@ export const SignUpStep = ({ data, next }: SignUpStepProps) => {
               data-testid='stepButton'
               onClick={() => {
                 handleSteps(values);
-                console.log(values);
               }}
             >
               &gt;

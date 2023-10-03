@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { DishData, OrderProps, PropsClient } from '../services/structure';
 import { getClient } from '../services/Clients/getClient';
+import secureLocalStorage from 'react-secure-storage';
 
 interface CartContextType {
   cartItems: DishData[];
@@ -30,13 +31,20 @@ const CartContext = createContext<CartContextType>({
   setOrder: () => {}
 });
 
+
+
 export const CartProvider = ({ children }: React.PropsWithChildren) => {
-  const [cartItems, setCartItems] = useState<DishData[]>([] as DishData[]);
+  const storedUserData = JSON.parse(secureLocalStorage.getItem('userData') as string);
+  const storedCartItems = JSON.parse(secureLocalStorage.getItem('cartItems') as string);
+  const storedIsCartVisible = JSON.parse(secureLocalStorage.getItem('isCartVisible') as string);
+
+
+  const [cartItems, setCartItems] = useState<DishData[]>(storedCartItems || []);
   const [amount, setAmount] = useState<number | null>(null);
-  const [userData, setUserData] = useState<PropsClient>({} as PropsClient);
+  const [userData, setUserData] = useState<PropsClient>(storedUserData || {});
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState<OrderProps[]>([] as OrderProps[]);
-  const [isCartVisible, setIsCartVisible] = useState(false);
+  const [isCartVisible, setIsCartVisible] = useState(storedIsCartVisible) || false;
 
   const userInfo = async () => {
     try {
@@ -51,7 +59,14 @@ export const CartProvider = ({ children }: React.PropsWithChildren) => {
 
   useEffect(() => {
     userInfo();
+
   }, []);
+
+  useEffect(() => {
+    secureLocalStorage.setItem('userData',JSON.stringify(userData));
+    secureLocalStorage.setItem('cartItems', JSON.stringify(cartItems));
+    secureLocalStorage.setItem('isCartVisible', JSON.stringify(isCartVisible));
+  }, [userData,cartItems,isCartVisible]);
 
   return (
     <CartContext.Provider

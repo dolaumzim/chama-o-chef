@@ -59,7 +59,7 @@ const RecoverPassword: React.FC = () => {
     >
       {({ isSubmitting }) => (
         <FormType as={Form}>
-          <img src="public/Logo Login.svg" alt="Logo" />
+          <img src="src/assets/LogoLogin.svg" alt="Logo" />
           <PageTitle>Redefinir Senha</PageTitle>
           <PageSubtitle>
             Insira o código de recuperação enviado para o email: {email}

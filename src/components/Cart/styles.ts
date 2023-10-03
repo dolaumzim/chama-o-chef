@@ -2,7 +2,7 @@ import { keyframes, styled } from 'styled-components';
 import { Button } from '../Button';
 
 type CartContainerProps = {
-  isActive: boolean;
+  isactive: boolean;
 };
 
 export const CartContainer = styled.section<CartContainerProps>`
@@ -18,7 +18,7 @@ export const CartContainer = styled.section<CartContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transform: translate(${props => (props.isActive ? '0%, 0%' : '110%, 0')});
+  transform: translate(${props => (props.isactive ? '0%, 0%' : '110%, 0')});
   transition: all 400ms ease;
   z-index: 1;
   box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
