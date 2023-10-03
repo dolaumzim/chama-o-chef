@@ -44,14 +44,12 @@ export const SectionDishes: React.FC = () => {
 
   const handleFetchNextPage = () => {
     fetchNextPage();
-    console.log(hasNextPage)
   };
 
   const averageRate = (ratings: Props.Rating[]) => {
-    const totalAux = ratings.reduce(
-     (sum, rating) => sum + rating.rate, 0);
-   return Number((totalAux / ratings.length).toFixed(1) )
-  }
+    const totalAux = ratings.reduce((sum, rating) => sum + rating.rate, 0);
+    return Number((totalAux / ratings.length).toFixed(1));
+  };
 
   return (
     <StyledSection>
@@ -60,7 +58,7 @@ export const SectionDishes: React.FC = () => {
         <TitleContainer>
           <h1>Pratos</h1>
           <InputFind
-            id='searchBar'
+            id="searchBar"
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Busca por prato"
@@ -77,9 +75,7 @@ export const SectionDishes: React.FC = () => {
             name={item.name}
             price={item.unit_price}
             restaurantName={item.chef.name}
-            rating={
-              item.ratings.length > 0 ? averageRate(item.ratings) : 0
-            }
+            rating={item.ratings.length > 0 ? averageRate(item.ratings) : 0}
             isFavorite={item.liked_by_me}
           />
         ))}

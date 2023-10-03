@@ -58,23 +58,3 @@ export const CarouselButtonIcon = styled.i`
   justify-content: center;
   align-items: center;
 `;
-
-// export const Outer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   overflow:visible;
-// `;
-
-// export const Inner = styled.div`
-//   width: 100%;
-//   overflow: visible;
-//   z-index: 0;
-
-
-//   >div>div>div{
-//     display:flex;
-//     justify-content:center;
-//     gap: 20px;
-//     padding: 15px
-//   }
-// `;
