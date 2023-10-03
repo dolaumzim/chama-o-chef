@@ -207,6 +207,7 @@ try {
                   <Styled.TitleDish>{dishData.name}</Styled.TitleDish>
 
                   <Styled.DescriptionDish>{`${dishData.description}`}</Styled.DescriptionDish>
+                  <Styled.Icons>
                   <Styled.Rate>
                     <img src={star} />
                     {average}
@@ -227,7 +228,7 @@ try {
                       cursor={'pointer'}
                     />
                   )}
-
+                  </Styled.Icons>
                   <Styled.Price>
                     {formatCurrency(
                       Number(dishData.unit_price) * counter,

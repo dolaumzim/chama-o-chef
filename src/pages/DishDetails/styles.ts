@@ -70,6 +70,7 @@ export const DescriptionDish = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 20px;
 `;
 
 export const DishInfo = styled.div`
@@ -77,6 +78,15 @@ export const DishInfo = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
+export const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  & > *:not(:last-child) {
+    margin-right: 10px; 
+  }
+  `;
 
 export const Chef = styled.h1`
   color: #000;
@@ -104,23 +114,22 @@ export const Price = styled.div`
 export const Rate = styled.span`
   display: flex;
   justify-content: space-between;
-  width: 45px;
-  height: 25px;
-  margin-top: 20px;
+  width: 47px;
+  height: 35px;
   padding: 0px 5px;
   border-radius: 5px;
   background: #fff3e5;
   float: left;
   color: #000;
-  font-size: 15px;
+  font-size: 20px;
   font-style: normal;
   align-items: center;
   gap: 4px;
   font-weight: 600;
 
   img {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -186,13 +195,13 @@ export const Unlike = styled(FcLikePlaceholder)`
 `;
 
 export const Dislike = styled(BsHeartbreakFill)`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `;
 
 export const Undislike = styled(BsHeartbreak)`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `;
 
 export const Outer = styled.div`
