@@ -17,6 +17,9 @@ interface ButtonProps {
 }
 
 const FavoriteButton = styled(Button)<ButtonProps>`
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background-color: transparent;
   cursor: pointer;
   img {
@@ -26,6 +29,7 @@ const FavoriteButton = styled(Button)<ButtonProps>`
 `;
 import { Link } from 'react-router-dom';
 import { frontEndRoutes } from '../../routes';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 interface PropsDish {
   id: string;
@@ -33,29 +37,48 @@ interface PropsDish {
   name: string;
   price: string;
   restaurantName: string;
-  rating: string;
-  isFavorite?: boolean;
+  rating: number;
+  isFavorite: boolean;
 }
 
 export const Dish = (data: PropsDish) => {
-  return (
-    <Link to={frontEndRoutes.dish(data.id)}>
-      <DishContainer>
-        <ImgDish>
-          <img src={data.image} alt={data.name} />
-        </ImgDish>
-        <DishInfo>
-          <StyledTitle>{data.name}</StyledTitle>
-          <StyledParagraph>{data.restaurantName}</StyledParagraph>
-          <StyledSecondParagraph>
-            R$
-            {data.price}
-            <span>
-              <img src={star} /> {data.rating}
-            </span>
-          </StyledSecondParagraph>
-        </DishInfo>
-      </DishContainer>
-    </Link>
+  const maxLength = 18;
+  const trimmedRestaurantName =
+    data.restaurantName.length > maxLength
+      ? data.restaurantName.substring(0, maxLength - 3) + '...'
+      : data.restaurantName;
+
+  const trimmedName =
+    data.name.length > maxLength
+      ? data.name.substring(0, maxLength - 3) + '...'
+      : data.name;
+
+  return (      
+        <Link to={frontEndRoutes.dish(data.id)}>
+          <DishContainer>
+            <ImgDish>
+              <img src={data.image} alt={data.name} />
+            </ImgDish>
+            {data.isFavorite ? (
+              <FavoriteButton>
+                <img src={heartRedIcon} alt="" />
+              </FavoriteButton>
+            ) : (
+              <FavoriteButton>
+                <img src={heartBlueIcon} alt="" />
+              </FavoriteButton>
+            )}
+            <DishInfo>
+              <StyledTitle>{trimmedName}</StyledTitle>
+              <StyledParagraph>{trimmedRestaurantName}</StyledParagraph>
+              <StyledSecondParagraph>
+                {formatCurrency(Number(data.price), 'BRL')}
+                <span>
+                  <img src={star} /> {data.rating}
+                </span>
+              </StyledSecondParagraph>
+            </DishInfo>
+          </DishContainer>
+        </Link>
   );
 };

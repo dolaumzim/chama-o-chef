@@ -19,7 +19,7 @@ export const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 3vw;
 
   img {
     height: 60px;
@@ -46,6 +46,21 @@ export const Logo = styled.div`
     font-weight: 700;
     line-height: normal;
   }
+
+  @media screen and (max-width: 1200px) {
+    ul {
+    flex-direction:column;
+    gap: 0px;
+  }
+    a {
+      font-size:12px;
+    }
+}
+  @media screen and (max-width: 750px) {
+    ul {
+    display:none;
+  }
+  }
 `;
 
 export const ImgLogo = styled.div`
@@ -64,14 +79,10 @@ export const ImgLogo = styled.div`
 export const Menu = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-right: 30px;
   border: 0px solid #ccc;
   gap: 30px;
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
 
   ul {
     list-style: none;
@@ -156,10 +167,7 @@ export const Menu = styled.div`
     color: #cecece;
     font-weight: 400;
   }
-  span {
-    color: gray;
-    cursor: pointer;
-  }
+
   .dropdown-menu ul li {
     padding: 10px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
@@ -168,5 +176,17 @@ export const Menu = styled.div`
   .dropdown-menu ul li:hover img {
     opacity: 1;
     cursor: pointer;
+  }
+`;
+
+export const HeaderName = styled.span`
+  display: flex;
+  color: gray;
+  cursor: pointer;
+  align-items: center;
+  font-weight: 600;
+
+  @media screen and (max-width: 700px) {
+    display:none;
   }
 `;

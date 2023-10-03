@@ -12,6 +12,11 @@ import { Ratings } from '../../components/Ratings';
 import { putLikeDish } from '../../services/Dishes/putLikeDish';
 import { getChefDishes } from '../../services/Chefs/getChefDishes';
 import Carousel from '../../components/Carousel';
+import { useCart } from '../../contexts/CartContext';
+import { Cart } from '../../components/Cart';
+import { formatCurrency } from '../../utils/formatCurrency';
+import { putDislikeDish } from '../../services/Dishes/putDislikeDish';
+import { Footer } from '../../components/Footer';
 
 interface Location {
   label: string;
@@ -24,23 +29,26 @@ export const DishDetails = () => {
   const [cordChef, setCordChef] = useState<Location[]>([]);
   const [cordClient, setCordClient] = useState<Location>();
   const [activeColor, setActiveColor] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
   const counterValue = useMemo(() => counter, [counter]);
   const [liked, setLiked] = useState<boolean | undefined>();
-  const [chefDishes, setChefDishes] = useState([]);
-
-  // const [carouselItems, setCarouselItems] = useState([]);
+  const [disliked, setDisliked] = useState<boolean | undefined>();
+  const [chefDishes, setChefDishes] = useState<Props.CarouselItemsProps[]>([]);
+  const { cartItems, setCartItems } = useCart();
 
   const fetchDishData = useCallback(async () => {
-    if (!id || dishData) {
+    if (!id ) {
       return;
     }
     const dish = await getDish(id);
-    const dataDish = { ...dish.data };
-    setDishData(dataDish);
-  }, [id, dishData]);
+    setDishData(dish.data);
+  }, [id]);
 
-  const fetchChefData = useCallback(async () => {
+useEffect(()=> {
+fetchChefData()
+},[dishData])
+
+  const fetchChefData = async () => {
     if (!dishData?.chef_id || cordChef.length > 0) {
       return;
     }
@@ -57,18 +65,25 @@ export const DishDetails = () => {
       const getDishesChef = await getChefDishes(chef.id);
       setCordChef(cords);
 
+      const averageRate = (dish: Props.DishData) => {
+        const totalAux = dish.ratings.reduce(
+         (sum, rating) => sum + rating.rate, 0);
+       return Number((totalAux / dish.ratings.length).toFixed(1) )
+      }
+
       const carouselItems = getDishesChef.data.map((dish: Props.DishData) => ({
         id: dish.id,
         image: dish.images[0],
         name: dish.name,
         price: dish.unit_price,
         restaurantName: dish.chef.name,
-        rating: dish.ratings.length > 0 ? dish.ratings[0].rate.toString() : '0'
+        rating: dish.ratings.length > 0 ? averageRate(dish).toString()
+        : '0',
+        isFavorite: dish.liked_by_me
       }));
       setChefDishes(carouselItems);
-      console.log('CarouselItems ', carouselItems);
     }
-  }, [dishData, cordChef]);
+  };
 
   const fetchClientData = useCallback(async () => {
     if (cordClient) {
@@ -84,11 +99,21 @@ export const DishDetails = () => {
   }, [cordClient]);
 
   useEffect(() => {
-    fetchDishData();
-    fetchChefData();
-    fetchClientData();
+    const fetchData = async() =>{
+try {
+  await fetchDishData();
+  await fetchClientData();  
+} catch (error) {
+  console.log(error)
+}
+    }
+    fetchData()
+  }, [id]);
+
+  useEffect(()=>{
     handleGetLike();
-  }, [fetchDishData, fetchChefData, fetchClientData]);
+    handleGetDislike();
+  },[dishData])
 
   useEffect(() => {
     const positionScroll = () => {
@@ -106,7 +131,7 @@ export const DishDetails = () => {
   };
 
   const decrementCounter = () => {
-    if (counterValue > 0) setCounter(counterValue - 1);
+    if (counterValue > 1) setCounter(counterValue - 1);
   };
 
   let average = 0;
@@ -115,7 +140,7 @@ export const DishDetails = () => {
       (sum, rating) => sum + rating.rate,
       0
     );
-    average = total / dishData.ratings.length;
+    average = Number((total / dishData.ratings.length).toFixed(1));
   } else {
     average = 0;
   }
@@ -130,6 +155,39 @@ export const DishDetails = () => {
     if (dishData?.id) {
       await putLikeDish(dishData.id);
       const response = await getDish(dishData.id);
+      setLiked(response.data.liked_by_me);
+      setDisliked(response.data.disliked_by_me);
+    }
+  };
+
+  const handleAddCart = () => {
+    if (cartItems && dishData) {
+      let existingItem = cartItems.find(item => item.id === dishData.id);
+
+      if (existingItem) {
+        existingItem = {
+          ...existingItem,
+          quantity: (existingItem.quantity || 0) + counter
+        };
+        const otherItems = cartItems.filter(item => item.id !== dishData.id);
+        setCartItems([...otherItems, existingItem]);
+      } else {
+        setCartItems([...cartItems, { ...dishData, quantity: counter }]);
+      }
+    }
+  };
+
+  const handleGetDislike = () => {
+    if (dishData?.disliked_by_me) {
+      return setDisliked(dishData.disliked_by_me);
+    }
+  };
+
+  const handleDislike = async () => {
+    if (dishData?.id) {
+      await putDislikeDish(dishData.id);
+      const response = await getDish(dishData.id);
+      setDisliked(response.data.disliked_by_me);
       setLiked(response.data.liked_by_me);
     }
   };
@@ -152,17 +210,34 @@ export const DishDetails = () => {
                   <Styled.TitleDish>{dishData.name}</Styled.TitleDish>
 
                   <Styled.DescriptionDish>{`${dishData.description}`}</Styled.DescriptionDish>
+                  <Styled.Icons>
                   <Styled.Rate>
                     <img src={star} />
                     {average}
                   </Styled.Rate>
                   {liked ? (
-                    <Styled.Like onClick={handleLike} cursor={'pointer'} />
+                    <Styled.Like data-testid="like" onClick={handleLike} cursor={'pointer'} />
                   ) : (
-                    <Styled.Dislike onClick={handleLike} cursor={'pointer'} />
+                    <Styled.Unlike data-testid="like" onClick={handleLike} cursor={'pointer'} />
                   )}
-
-                  <Styled.Price>{`R$ ${dishData.unit_price}`}</Styled.Price>
+                  {disliked ? (
+                    <Styled.Dislike
+                      onClick={handleDislike}
+                      cursor={'pointer'}
+                    />
+                  ) : (
+                    <Styled.Undislike
+                      onClick={handleDislike}
+                      cursor={'pointer'}
+                    />
+                  )}
+                  </Styled.Icons>
+                  <Styled.Price>
+                    {formatCurrency(
+                      Number(dishData.unit_price) * counter,
+                      'BRL'
+                    )}
+                  </Styled.Price>
                   <Styled.ToAdd>
                     <Styled.Counter>
                       <Styled.ButtonPlus
@@ -179,13 +254,20 @@ export const DishDetails = () => {
                         +
                       </Styled.ButtonPlus>
                     </Styled.Counter>
-                    <Styled.Button>Adicionar ao carrinho</Styled.Button>
+                    <Styled.Button onClick={handleAddCart}>
+                      Adicionar ao carrinho
+                    </Styled.Button>
                   </Styled.ToAdd>
                 </Styled.DishInfo>
               </Styled.DetailsDish>
               <Map page={'details'} restaurant={cordChef} user={cordClient} />
               <h1>Peça também</h1>
-              <Carousel items={chefDishes} />
+
+              <Styled.Outer>
+                <Styled.Inner>
+                  <Carousel items={chefDishes} />
+                </Styled.Inner>
+              </Styled.Outer>
 
               <h1>Avaliações</h1>
               {dishData.ratings.length > 0 ? (
@@ -205,14 +287,19 @@ export const DishDetails = () => {
                       total_dislikes={item.dislikes}
                     />
                   ))}
+                  
                 </>
               ) : (
                 'Ainda sem avaliações.'
-              )}
+                )}
             </>
           )}
         </Styled.ContainerDish>
+          <Footer/>
       </Styled.Container>
+      <Cart />
+      
     </>
+    
   );
 };

@@ -54,7 +54,6 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
     try {
       setSignUpError(false);
       const response = await postSignUpRequest(values);
-      console.log(response)
       setAddresses(emptyAddresses)
       if (response.status === 200) navigate('/login');
     } catch (error) {
@@ -201,7 +200,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
               &lt;
             </StepButton>
           </StepBack>
-          <SubmitButton onClick={()=> console.log(values)}>
+          <SubmitButton data-testid='submitButton'>
             Criar Conta
           </SubmitButton>
           <CancelAddress
@@ -212,7 +211,7 @@ export const SignUpStepAddress = ({ data, prev }: SignUpStepAddressProps) => {
               setAddresses(emptyAddresses)
             }}
           >
-            Mudei de idiea, não quero cadastrar endereço agora...
+            Mudei de ideia, não quero cadastrar endereço agora...
           </CancelAddress>
           {signUpError ? (
             <span> Não foi possível realizar seu cadastro </span>

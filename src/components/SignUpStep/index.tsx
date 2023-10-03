@@ -67,15 +67,15 @@ export const SignUpStep = ({ data, next }: SignUpStepProps) => {
             Quer cadastrar um endereço?
             <StepButton
               type="button"
+              data-testid='stepButton'
               onClick={() => {
                 handleSteps(values);
-                console.log(values);
               }}
             >
               &gt;
             </StepButton>
           </StepGo>
-          <SubmitButton>Criar Conta</SubmitButton>
+          <SubmitButton data-testid='submitButton'>Criar Conta</SubmitButton>
           {signUpError ? (
             <span> Não foi possível realizar seu cadastro </span>
           ) : null}

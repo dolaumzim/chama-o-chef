@@ -17,7 +17,7 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ page, restaurant, user }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyAmQkNzDxZoTNhTNx0nXJB9w6-_ycw4kb8'
+    googleMapsApiKey: import.meta.env.VITE_KEY_API_MAP
   });
   const [map, setMap] = React.useState(null);
   const [markersReady, setMarkersReady] = useState(false);

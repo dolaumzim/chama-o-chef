@@ -105,8 +105,8 @@ export interface ClientAddresses {
 
 export interface Meta {
   current_page: number;
-  previous_page: number | null; //não tenho certeza se é number, na api é só null
-  next_page: number | null; //não tenho certeza se é number, na api é só null
+  previous_page: number | null;
+  next_page: number | null;
   items_per_page: number;
   total_pages: number;
   total_items: number;
@@ -172,6 +172,7 @@ export interface DishData {
   liked_by_me: boolean;
   disliked_by_me: boolean;
   likes: Like[];
+  quantity?: number;
 }
 
 export interface DishesApiResponse {
@@ -301,4 +302,29 @@ export interface RatingsProps {
   dish_id: string;
   rate: number | null;
   comment: string;
+}
+
+export interface CarouselItemsProps {
+  id: string;
+  image: string;
+  name: string;
+  price: string;
+  restaurantName: string;
+  rating: number;
+  isFavorite: boolean;
+}
+
+export interface CarouselProps {
+  items: CarouselItemsProps[];
+  onToggleFavorite?: (dishId: string, isFavorite: boolean) => void;
+}
+
+export interface Item {
+  id: string;
+  order_id: string;
+  dish_id: string;
+  amount: number | null;
+  unit_price: string;
+  created_at: string;
+  updated_at: string;
 }

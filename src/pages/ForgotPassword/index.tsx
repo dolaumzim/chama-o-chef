@@ -24,8 +24,6 @@ const ForgotPassword: React.FC = () => {
         email: values.email,
       });
   
-      console.log('Response Status:', response.status);
-  
       if (response.status === 200) {
         const responseData = response.data;
         setRecoveryToken(responseData.reset_password_token); // Set the recovery token
@@ -49,7 +47,7 @@ const ForgotPassword: React.FC = () => {
     >
       {({ isSubmitting }) => (
         <FormType as={Form}>
-          <img src="public/Logo Login.svg" alt="Logo" />
+          <img src="src/assets/LogoLogin.svg" alt="Logo" />
           <PageTitle>Esqueceu sua senha?</PageTitle>
           <PageSubtitle>
             Digite o endereço de e-mail que você usou quando se inscreveu e enviaremos instruções para redefinir sua senha.

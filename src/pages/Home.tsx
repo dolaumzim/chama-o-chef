@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import NearbyDishes from '../components/NearbyDishes';
 import FavoriteDishes from '../components/FavoriteDishes';
-// import AllDishes from '../components/AllDishes';
 import Header from '../components/Header';
 import { SectionDishes } from '../components/SectionDishes';
 import { SectionMapHome } from '../components/SectionMap';
-import Footer from '../components/Footer';
+import Background from '../components/Background';
+import { Cart } from '../components/Cart';
+import  Footer  from '../components/Footer';
 
 const Home: React.FC = () => {
   const [activeColor, setActiveColor] = useState(false);
@@ -24,16 +25,15 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header action={activeColor} />
-      <div style={{height:'300px', width:'100%', display:'flex', justifyContent: 'center', alignItems : 'center', overflow:'hidden', background: 'url("src/assets/banner.svg")', backgroundSize: 'cover', marginBottom:'2vh', backgroundPosition: '50%'}}>
-      </div>
-      <div id='nearby'/>
-      <NearbyDishes/>
+      <Background />
+      <div id="nearby" />
+      <NearbyDishes />
       <SectionDishes />
-      <div id='favorites'/>
+      <div id="favorites" />
       <FavoriteDishes />
-      <div id='map'/>
+      <div id="map" />
       <SectionMapHome />
-      {/* <AllDishes /> */}
+      <Cart />
       <Footer/>
     </div>
   );

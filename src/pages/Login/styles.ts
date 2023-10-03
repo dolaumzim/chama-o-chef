@@ -95,7 +95,7 @@ export const ErrorSpan = styled.span`
 `
 
 export const SuccessMessage = styled.div`
-    color: red;
-    font-size: 14px;
+    color: green;
+    font-size: 15px;
     margin-bottom: 10px;
 `

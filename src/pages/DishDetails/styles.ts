@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
+import { FcDislike, FcLike, FcLikePlaceholder } from 'react-icons/fc';
 
 export const Container = styled.section`
   width: 100%;
@@ -69,6 +69,7 @@ export const DescriptionDish = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 20px;
 `;
 
 export const DishInfo = styled.div`
@@ -76,6 +77,14 @@ export const DishInfo = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
+export const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+  
+  `;
 
 export const Chef = styled.h1`
   color: #000;
@@ -103,23 +112,22 @@ export const Price = styled.div`
 export const Rate = styled.span`
   display: flex;
   justify-content: space-between;
-  width: 45px;
-  height: 25px;
-  margin-top: 20px;
+  width: 70px;
+  height: 35px;
   padding: 0px 5px;
   border-radius: 5px;
   background: #fff3e5;
   float: left;
   color: #000;
-  font-size: 15px;
+  font-size: 20px;
   font-style: normal;
   align-items: center;
   gap: 4px;
   font-weight: 600;
 
   img {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -179,7 +187,39 @@ export const Like = styled(FcLike)`
   height: 40px;
 `;
 
-export const Dislike = styled(FcLikePlaceholder)`
+export const Unlike = styled(FcLikePlaceholder)`
   width: 40px;
   height: 40px;
+`;
+
+export const Dislike = styled(FcDislike)`
+  width: 40px;
+  height: 40px;
+`;
+
+export const Undislike = styled(FcDislike)`
+  width: 40px;
+  height: 40px;
+  opacity: 0.3
+`;
+
+export const Outer = styled.div`
+  display: flex;
+  justify-content: center;
+  overflow:visible;
+  width:100%;
+`;
+
+export const Inner = styled.div`
+  width: 100%;
+  overflow: visible;
+  z-index: 0;
+
+
+  >div>div>div{
+    display:flex;
+    justify-content:center;
+    gap: 20px;
+    padding: 15px
+  }
 `;
