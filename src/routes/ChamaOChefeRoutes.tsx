@@ -7,10 +7,10 @@ import { PublicSectionLayout } from '../components/PublicSectionLayout';
 import { SignUp } from '../pages/SignUp';
 import { frontEndRoutes } from '.';
 import { DishDetails } from '../pages/DishDetails';
-// import { Locationteste } from '../pages/locationteste';
 import { UserProfile } from '../pages/UserProfile';
 import { CartProvider } from '../contexts/CartContext';
 import { AllDishes } from '../pages/AllDishes';
+import { ReviewOrder } from '../components/ReviewOrder';
 
 const ChamaOChefeRoutes = () => {
   const authenticated = localStorage.getItem('token');
@@ -40,7 +40,6 @@ const ChamaOChefeRoutes = () => {
     return (
       <CartProvider>
         <Routes>
-          {/* <Route path="/location" element={<Locationteste />} /> */}
           <Route path={frontEndRoutes.home} element={<Home />} />
           <Route path={frontEndRoutes.userProfile} element={<UserProfile />} />
           <Route path={frontEndRoutes.dish(':id')} element={<DishDetails />} />
@@ -48,6 +47,10 @@ const ChamaOChefeRoutes = () => {
           <Route
             path="/*"
             element={<Navigate replace to={frontEndRoutes.home} />}
+          />
+          <Route
+            path={frontEndRoutes.reviewOrder(':orderId')}
+            element={<ReviewOrder />}
           />
         </Routes>
       </CartProvider>

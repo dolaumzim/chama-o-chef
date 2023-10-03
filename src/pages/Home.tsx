@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NearbyDishes from '../components/NearbyDishes';
 import FavoriteDishes from '../components/FavoriteDishes';
-// import AllDishes from '../components/AllDishes';
 import Header from '../components/Header';
 import { SectionDishes } from '../components/SectionDishes';
 import { SectionMapHome } from '../components/SectionMap';
@@ -25,16 +24,15 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header action={activeColor} />
-      <Background/>
-      <div id='nearby'/>
-      <NearbyDishes/>
+      <Background />
+      <div id="nearby" />
+      <NearbyDishes />
       <SectionDishes />
-      <div id='favorites'/>
+      <div id="favorites" />
       <FavoriteDishes />
-      <div id='map'/>
+      <div id="map" />
       <SectionMapHome />
       <Cart />
-      {/* <AllDishes /> */}
     </div>
   );
 };

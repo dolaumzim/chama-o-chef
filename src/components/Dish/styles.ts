@@ -6,7 +6,6 @@ export const DishContainer = styled.div`
   flex-shrink: 0;
   margin-top: 50px;
   border-radius: 5px 5px 10px 10px;
-  /* background: #f0f0f0; */
   background: #aeaebe35;
   position: relative;
   transition: transform 0.4s ease-in-out;
@@ -58,12 +57,6 @@ export const StyledParagraph = styled.p`
   font-weight: 600;
   color: rgba(0, 0, 0, 0.5);
   margin-bottom: 8px;
-  /* color: #000;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-bottom: 5px; */
 `;
 
 export const StyledSecondParagraph = styled.p`
