@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
 import {  useState } from 'react';
-import '../stylesteste.css';
 import * as Props from './structure.ts';
 import { postLoginRequest } from '../../services/Auth/postLogin.ts';
 import * as PropsServices from '../../services/structure.ts';
@@ -64,7 +63,7 @@ const Login = () => {
               isValid
             }) => (
               <FormType>
-                  <img src="/Logo Login.svg" alt="" />
+                  <img src="src/assets/LogoLogin.svg" alt="" />
                   <PageTitle>Acesse sua conta</PageTitle>
                   <PageSubtitle>Insira seus dados abaixo para realizar o Login</PageSubtitle>
                 

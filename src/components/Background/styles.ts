@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const BackgroundContainer = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 550px;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; 

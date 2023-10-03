@@ -52,6 +52,7 @@ import { addressInitial, addressesSchema, emptyAddresses, newAddressInitial, tel
 import { putUpdateClient } from '../../services/Clients/putUpdateClient.ts';
 import Header from '../../components/Header/index.tsx';
 import arrowLeft from '../../assets/arrow-left.svg';
+import { Footer } from '../../components/Footer/index.tsx';
 
 
 interface updateProps {
@@ -160,7 +161,6 @@ const [cityAndState, setCityAndState] = useState<AddressProps[]>([
     const response = await postClientTelephone(newTel);
     clientInfo();
     setAddTelButton(false);
-    console.log(response);
   };
 
   const handleAddAddress = async (values: AddressAttributes) => {
@@ -503,6 +503,8 @@ const [cityAndState, setCityAndState] = useState<AddressProps[]>([
             </NewButtonContainer>
             <Line></Line>
         </Section>
+        <Footer/>
     </Container>
+    
   );
 };

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
-import { BsHeartbreak, BsHeartbreakFill } from 'react-icons/bs';
+import { FcDislike, FcLike, FcLikePlaceholder } from 'react-icons/fc';
 
 export const Container = styled.section`
   width: 100%;
@@ -82,10 +81,9 @@ export const DishInfo = styled.div`
 export const Icons = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 30px;
   align-items: center;
-  & > *:not(:last-child) {
-    margin-right: 10px; 
-  }
+  
   `;
 
 export const Chef = styled.h1`
@@ -114,7 +112,7 @@ export const Price = styled.div`
 export const Rate = styled.span`
   display: flex;
   justify-content: space-between;
-  width: 47px;
+  width: 70px;
   height: 35px;
   padding: 0px 5px;
   border-radius: 5px;
@@ -194,14 +192,15 @@ export const Unlike = styled(FcLikePlaceholder)`
   height: 40px;
 `;
 
-export const Dislike = styled(BsHeartbreakFill)`
-  width: 35px;
-  height: 35px;
+export const Dislike = styled(FcDislike)`
+  width: 40px;
+  height: 40px;
 `;
 
-export const Undislike = styled(BsHeartbreak)`
-  width: 35px;
-  height: 35px;
+export const Undislike = styled(FcDislike)`
+  width: 40px;
+  height: 40px;
+  opacity: 0.3
 `;
 
 export const Outer = styled.div`

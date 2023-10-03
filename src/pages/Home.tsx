@@ -6,6 +6,7 @@ import { SectionDishes } from '../components/SectionDishes';
 import { SectionMapHome } from '../components/SectionMap';
 import Background from '../components/Background';
 import { Cart } from '../components/Cart';
+import { Footer } from '../components/Footer';
 
 const Home: React.FC = () => {
   const [activeColor, setActiveColor] = useState(false);
@@ -33,6 +34,7 @@ const Home: React.FC = () => {
       <div id="map" />
       <SectionMapHome />
       <Cart />
+      <Footer/>
     </div>
   );
 };

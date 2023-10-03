@@ -16,6 +16,7 @@ import { useCart } from '../../contexts/CartContext';
 import { Cart } from '../../components/Cart';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { putDislikeDish } from '../../services/Dishes/putDislikeDish';
+import { Footer } from '../../components/Footer';
 
 interface Location {
   label: string;
@@ -155,6 +156,7 @@ try {
       await putLikeDish(dishData.id);
       const response = await getDish(dishData.id);
       setLiked(response.data.liked_by_me);
+      setDisliked(response.data.disliked_by_me);
     }
   };
 
@@ -186,6 +188,7 @@ try {
       await putDislikeDish(dishData.id);
       const response = await getDish(dishData.id);
       setDisliked(response.data.disliked_by_me);
+      setLiked(response.data.liked_by_me);
     }
   };
 
@@ -284,15 +287,19 @@ try {
                       total_dislikes={item.dislikes}
                     />
                   ))}
+                  
                 </>
               ) : (
                 'Ainda sem avaliações.'
-              )}
+                )}
             </>
           )}
         </Styled.ContainerDish>
+          <Footer/>
       </Styled.Container>
       <Cart />
+      
     </>
+    
   );
 };

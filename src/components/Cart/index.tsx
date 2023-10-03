@@ -57,7 +57,7 @@ export const Cart = () => {
 
   return (
     <>
-      <CartContainer isActive={isCartVisible}>
+      <CartContainer isactive={isCartVisible}>
         <CartItems>
           {cartItems.map((item, index) => (
             <CartItem
