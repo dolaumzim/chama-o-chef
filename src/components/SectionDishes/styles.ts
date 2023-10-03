@@ -65,7 +65,7 @@ const rotate = keyframes`
 
 export const ButtonLoad = styled(Button)`
   width: 100%;
-  border: 1px solid #f5f0eb;
+  border: 1px solid #f58100;
   background: #fff;
   color: #f58100;
   cursor: pointer;
@@ -74,7 +74,7 @@ export const ButtonLoad = styled(Button)`
   border-radius: 4px;
   margin: 3px 0;
   height: 50px;
-  font-weight: 600;
+  font-weight: 1000;
   transition: 0.1s;
   display: inline-flex;
   align-items: center;
